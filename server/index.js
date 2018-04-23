@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const {fetchWeather} = require(path.join(__dirname + '/../database/helpers.js'));
+const { fetchWeather, makeQueryString } = require(path.join(__dirname + '/../database/helpers.js'));
 const DB = require(path.join(__dirname + '/../database/database.js'));
 
 const app = express();
@@ -54,33 +54,3 @@ app.get('/weather', (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log('server listening on 3000!')
 })
-
-
-let makeQueryString = (props) => {
-  // called everytime there is a change in state (aka a filter is selected/deselected)
-  // returns a string that is used to query the database 
-
-  // example query string: {"$and": [{"$or": [{"region": "Northeast"}, {"region": "Rockies"}]},
-  //                                 {"$or": [{"temperature": "hot"}, {"temperature": "mild"}]}]}
-
-  let oneCategoryQuery = []
-  let queries = (props ? JSON.parse(props) : {}) //if no filters selected, eventually return "{}"
-  for (let category in queries) { 
-    let oneQuery = [];
-    if (queries[category].length > 0) {
-      queries[category].forEach((selection) => {
-        let oneFilter = {};
-        oneFilter[category] = selection;
-        oneQuery.push(oneFilter);
-      })
-      let oneCategory = {}
-      oneCategory["$or"] = oneQuery; //return cities that match filters in one category (e.g., hot or mild if both are selected)
-      oneCategoryQuery.push(oneCategory)
-    }
-  }
-  let allFilters = {}
-  if(oneCategoryQuery.length > 0){ 
-    allFilters["$and"] = oneCategoryQuery;
-  } 
-  return JSON.stringify(allFilters)
-}
