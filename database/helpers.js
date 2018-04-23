@@ -1,6 +1,7 @@
 const axios = require('axios');
 const YQL = require('YQL');
 
+// Returns the weatherdata for the cities. Currently, the result of this function is logged to the console on the client side
 fetchWeather = function(cityIDs, callback) {
 
   var query = new YQL(`SELECT * FROM weather.forecast where woeid in(${cityIDs})`)
@@ -11,7 +12,9 @@ fetchWeather = function(cityIDs, callback) {
 
       var weatherData = data.query.results.channel;
 
+      // importantData is an array of objects which hold the cityWeather data retrieved from the API
       var importantData = [];
+
 
       for (var city of weatherData) {
         // extract weatherID from link
