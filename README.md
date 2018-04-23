@@ -51,13 +51,13 @@ npm install
 Run the following command within the root directory in order to start a local server:
 
 ```sh
-npm server-dev
+npm run server-dev
 ```
 
 Run the following command within the root directory in order to have webpack continually bundle your code
 
 ```sh
-npm react-dev
+npm run react-dev
 ```
 
 ## Contributing
