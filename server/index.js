@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const axios = require('axios');
 const {fetchWeather} = require(path.join(__dirname + '/../database/helpers.js'));
 const DB = require(path.join(__dirname + '/../database/database.js'));
 
@@ -12,11 +11,8 @@ app.use(bodyParser.json());
 
 app.get('/faves', (req, res) => {
   DB.getFavesFromDB((err, data) => {
-    if (err) {console.log('ERROR IN GETTING FAVES FROM DB: ', err)}
-    else {
-      console.log('sdfsdfds', data)
-      res.send(data)
-    }
+    if (err) {console.log('ERROR IN GETTING FAVORITES FROM DB: ', err)}
+    else {res.status(200).send(data)}
   })
 })
 
@@ -25,32 +21,32 @@ app.post('/addFaves', (req, res) => {
 })
 
 app.post('/deleteFaves', (req, res) => {
-  // console.log('hi david')
   DB.deleteFromDB(req.body)
-  res.end(JSON.stringify(req.body))
+  res.status(200).send(JSON.stringify(req.body))
 })
 
 app.get('/cities', (req, res) => {
-  // call DB.queryDB here to make a query to the database for the cities that match the queryString from the front end
+  // make a query to the database using queryString
+  // queryString created by makeQueryString function
   let temp = (req.query !== '{}') ? req.query[0] : {};
   let queryString = makeQueryString(temp)
   DB.queryDB(queryString, (err, docs) => {
     if (err) {console.log('ERROR IN GETTING RESULTS FROM DB: ', err)}
     else {
-      res.send(docs);
+      res.status(200).send(docs); //returns cities that match queryString to getCities in index.jsx
     }
   })    
 });
 
 app.get('/weather', (req, res) => {
-  var stringOfCityIDs = req.query.cityIDs.join(',');
+  var stringOfCityIDs = req.query.cityIDs.join(','); //gets all city IDs for API call
 
-  fetchWeather(stringOfCityIDs, (err, data) => {
+  fetchWeather(stringOfCityIDs, (err, data) => { //calls fetchWeather in helpers.js
     if (err) {
-      console.log(err);
-      res.status(500).send('server error!')
+      console.log('ERROR FETCHING WEATHER: ',err);
+      res.status(500).send('Server error! Unable to fetch weather.')
     } else {
-      res.status(200).send(data);
+      res.status(200).send(data); //sends data back to getWeather in index.jsx
     }
   })
 });
@@ -61,24 +57,30 @@ app.listen(process.env.PORT || 3000, () => {
 
 
 let makeQueryString = (props) => {
-  let allQueries = []
-  let queries = (props ? JSON.parse(props) : {})
-  for (let category in queries) {
+  // called everytime there is a change in state (aka a filter is selected/deselected)
+  // returns a string that is used to query the database 
+
+  // example query string: {"$and": [{"$or": [{"region": "Northeast"}, {"region": "Rockies"}]},
+  //                                 {"$or": [{"temperature": "hot"}, {"temperature": "mild"}]}]}
+
+  let oneCategoryQuery = []
+  let queries = (props ? JSON.parse(props) : {}) //if no filters selected, eventually return "{}"
+  for (let category in queries) { 
     let oneQuery = [];
     if (queries[category].length > 0) {
       queries[category].forEach((selection) => {
-        let obj = {};
-        obj[category] = selection;
-        oneQuery.push(obj);
+        let oneFilter = {};
+        oneFilter[category] = selection;
+        oneQuery.push(oneFilter);
       })
-      let obj = {}
-      obj["$or"] = oneQuery;
-      allQueries.push(obj)
+      let oneCategory = {}
+      oneCategory["$or"] = oneQuery; //return cities that match filters in one category (e.g., hot or mild if both are selected)
+      oneCategoryQuery.push(oneCategory)
     }
   }
-  let obj = {}
-  if(allQueries.length > 0){
-    obj["$and"] = allQueries;
+  let allFilters = {}
+  if(oneCategoryQuery.length > 0){ 
+    allFilters["$and"] = oneCategoryQuery;
   } 
-  return JSON.stringify(obj)
+  return JSON.stringify(allFilters)
 }
