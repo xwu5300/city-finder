@@ -1,6 +1,6 @@
-# City Liver
+# City Finder
 
-> Pithy project description
+> A simple single-page application to help select a city to live in within the United States
 
 ## Team
 
@@ -14,55 +14,51 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+    1. [Run the Application Locally](#run-the-application-locally)
 1. [Contributing](#contributing)
 
 
 ## Usage
 
-> Click the buttons to render the US cities that match your filters.
+The application starts with the 39 largest cities in the United States rendered to the page. From there, the user is able to filter the results using a number of different parameters such as metro size, region, population, cost of livng, surrounding enviornment and climate. The list of cities matching the criteria selected by the user updates on every button click and the cities are re-rendered to the page. The user can then hover on each city to display more specific information such as exact population and average temperature.
 
-src/index.jsx
-Contains the App 
-State contains cities: array, favorites:array, showFavorites: boolean
+## Tech stack
 
-Functions: 
-getCities - sends request to app.('/cities') sends first argument (state) as 'params' as a get request to /cities endpoint. The results should be the filtered cities from the db. 
-The cb in '.then' sets state of cities: to the cities from the response.
+#### Core technologies:
 
-getWeather - gets weather data for each city in this.state.cities
+**[React](https://reactjs.org/), [Express](https://expressjs.com/), [MongoDB](https://www.mongodb.com/), [Mongoose](http://mongoosejs.com/docs/index.html), [MLAB](http://docs.mlab.com/)** and **[Webpack](https://webpack.js.org/)**
 
+#### Other technologies:
 
-server/index.js
-app.get(/cities) - queries the db based on the state passed to it as params passed to it.
-functions:
-makeQueryString - creates query string based on filters selected/state passed to it. {"$and": {"$or" [{},{}]}}. Console log and view mongodb docs on '$and' and '$or' for more info. 
-The database is hand-written and holds all city information EXCEPT for weather data.
-Sends data back to src/index.jsx app.get('/cities')
-
+Bulma, Axios, and Yahoo Query Language (to access weather data from Yahoo! API)
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+See general and development-specific dependencies within package.json for more information. Please note the application uses deprecated versions in certain instances in order to ensure the dependencies worked together.
 
 ## Development
 
-### Installing Dependencies
+#### Installing Dependencies
 
-From within the root directory:
+Run npm install within the root directory in order to install dependencies:
 
 ```sh
 npm install
 ```
 
-### Roadmap
+#### Run the application locally
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+Run the following command within the root directory in order to start a local server:
 
+```sh
+npm server-dev
+```
+
+Run the following command within the root directory in order to have webpack continually bundle your code
+
+```sh
+npm react-dev
+```
 
 ## Contributing
 
