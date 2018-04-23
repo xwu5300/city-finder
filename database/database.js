@@ -17,6 +17,14 @@ db.once('open', function() {
   console.log('connected to database!!')
 });
 
+// ======================
+// The data in the citySchema is currently hardcoded. Was created in an Excel file, converted to csv, and then imported to mlab
+// 
+// http://docs.mlab.com/migrating/
+// Use example located under this header -> "Importing a JSON, CSV or TSV file"
+// ======================
+
+// Schema representing the cities that populate on clicking the filter buttons
 const citySchema = mongoose.Schema({
   id: Number,
   city_name_short: String,
@@ -40,6 +48,7 @@ const citySchema = mongoose.Schema({
 
 const City = mongoose.model('City', citySchema);
 
+// Schame representing the favorite cities that are saved by the user
 const favSchema = mongoose.Schema({
   _id: String,
   id: Number,
@@ -66,27 +75,36 @@ const Favorites = mongoose.model('Favorites', favSchema)
 // remember to export functions made in this file
 
 let queryDB = (queryObj, callback) => {
-  let temp = (queryObj !== '{}') ? JSON.parse(queryObj) : {};
+  // Temp is first compared to a stringified empty object because it has to be passed from the server as a string
+    // if temp is '{}', set it to an empty object
+    // else
+      // parse the stringified queryObj
+  let temp = (queryObj === '{}') ? {} : JSON.parse(queryObj);
+  // Use temp variable to find the matching cities in the database
   City.find(temp, (err, docs) => {
-    if (err) { console.log('Error in querying the City database! Error is: ', err) };
+    if (err) { console.log('ERROR IN QUERYING THE CITY DATABASE! ERROR IS: ', err) };
+    
     callback(err, docs);
   })
 }
 
+// Adding a city to the favorites table
 let addToDB = (data) => {
   Favorites.create(data.city)
 }
 
+// Deleting a city from the favorites database with the correct city id
 let deleteFromDB = (data) => {
   Favorites.deleteOne({"id": data.city.id}, (err, data) => {
-    console.log('err', err)
+    console.log('ERROR IN DELETING FROM THE DATASE! ERROR IS: ', err)
   })
 }
 
+// Return all the cities that are currently stored in the favorites table
 let getFavesFromDB = (callback) => {
   console.log('in get faves whoo!')
   Favorites.find({}, (err, data) => {
-    if (err) { console.log('Error in querying the Favorites database! Error is: ', err) };
+    if (err) { console.log('ERROR IN QUERYING THE FAVORITES DATABASE! ERROR IS: ', err) };
     callback(err, data);
   })
 }
