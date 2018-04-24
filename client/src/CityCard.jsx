@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { DragSource } from 'react-dnd';
 
 class CityCard extends React.Component {
   constructor(props) {
