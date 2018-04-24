@@ -1,10 +1,12 @@
 import React from "react";
 import axios from "axios";
+import CityCard from "./CityCard.jsx";
 
 class Results extends React.Component {
   constructor(props) {
     super(props);
     this.stylePopulation = this.stylePopulation.bind(this);
+    this.deleteOrSave = this.deleteOrSave.bind(this);
   }
   //adds clicked city to favorites in database
   save(city) {
@@ -36,6 +38,10 @@ class Results extends React.Component {
       });
   }
 
+  deleteOrSave(city) {
+    this.props.showFavorites ? this.delete(city): this.save(city);
+  }
+
   //converts population number into a string and formats it with commas for better readability/user experience
   stylePopulation(population) {
     var reversed = population
@@ -62,51 +68,10 @@ class Results extends React.Component {
       return (
         <div className="cities">
           {display.map(city => {
-            let style = {
-              backgroundImage: "url(" + city.image_url + ")",
-              width: "300px",
-              height: "200px",
-              backgroundPosition: "center",
-              backgroundSize: "cover"
-            };
-
-            var popString = this.stylePopulation(city.population);
-
             return (
-              <div
-                className="cityPanel"
-                value={city}
-                style={style}
-                onClick={() => {
-                  this.props.showFavorites
-                    ? this.delete(city)
-                    : this.save(city);
-                }}
-                key={city._id}
-              >
-                <div className="container">
-                  <div className="overlay">
-                    <h2 className="has-text-black has-text-weight-bold">
-                      {city.city_name_short}, {city.state}
-                    </h2>
-                    <div className="has-text-black has-text-weight-semibold">
-                      Population: {popString}
-                    </div>
-                    <div className="has-text-black has-text-weight-semibold">
-                      Average rent: ${city.rent_cost}
-                    </div>
-                    <div className="has-text-black has-text-weight-semibold">
-                      Average high temp: {city.avg_high_temp}
-                      {"\xB0"}
-                    </div>
-                  </div>
-                  <div className="info">
-                    <h2 className="has-text-black has-text-weight-bold">
-                      {city.city_name_short}, {city.state}
-                    </h2>
-                  </div>
-                </div>
-              </div>
+              <div id="temp" key={city._id}>
+              <CityCard city={city} handleClick={this.deleteOrSave}/>
+            </div>
             );
           })}
         </div>

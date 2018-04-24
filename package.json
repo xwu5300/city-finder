@@ -24,6 +24,8 @@
     "jquery": "^3.1.1",
     "mongoose": "^4.9.6",
     "react": "^15.4.2",
+    "react-dnd": "^2.6.0",
+    "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^15.4.2",
     "request": "^2.81.0",
     "yql": "^1.0.2"
