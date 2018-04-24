@@ -9,6 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //selected cities for comparison should be in state: {left: ___, right: ___}
       cities: [],
       favorites: [],
       showFavorites: false
