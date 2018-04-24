@@ -1,3 +1,3 @@
-export const Types = {
+export const ItemTypes = {
   CARD: 'card'
 };
