@@ -29,11 +29,11 @@ class CityCard extends React.Component {
       backgroundSize: "cover"
     };
     const popString = this.stylePopulation(city.population);
-    
+
     return (
       <div
         className="cityPanel"
-        value={city}
+        value={city.city_name_long}
         style={style}
         onClick={() => this.props.handleClick(city)}
         key={city._id}
