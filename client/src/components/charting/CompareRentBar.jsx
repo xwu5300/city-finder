@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { VictoryChart, VictoryBar, VictoryStack, VictoryTheme, VictoryAxis, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
+import { VictoryChart, VictoryBar, VictoryStack, VictoryTheme, VictoryAxis, VictoryTooltip, VictoryVoronoiContainer, VictoryLabel } from 'victory'
 
-class CompareBar extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
+class CompareRentBar extends Component {
+
+  //    data format
   //     cities: [
   //       { avg_high_temp: 55,
   //         avg_rent_index: 48.4,
@@ -46,50 +45,68 @@ class CompareBar extends Component {
   //         zip_code: 10001,
   //         _id: "5ace7e1e95a24220f04467dd",
   //       }
-  //     ]
-  //   };
-  // }
+  //    ]
 
   render() {
     let cities = this.props.cities;
-
     return (
       <div>
         <div style={{ width: `500px`, margin: `auto`, paddingTop: '20' }}>
           <div>
             <VictoryChart
-              domainPadding={20}
+              domainPadding={40}
               theme={VictoryTheme.material}
               animate={{ duration: 500, easing: "bounce"}}
-              containerComponent={<VictoryVoronoiContainer/>}
+              padding={{ left: 60, right: 20, bottom: 50, top: 50 }}
+              containerComponent={
+                <VictoryVoronoiContainer
+                />}
               >
+              <VictoryLabel 
+                text={`Rent Comparison: ${cities[0].city_name_short} vs. ${cities[1].city_name_short}`} 
+                verticalAnchor={"end"}
+                x={80}
+                y={30}
+                />
               <VictoryAxis
                 tickValues={cities.map((city) => city.city_name_short)}
-                tickFormat={(x) => {
-                  return '';
-                }}
                 label={"Cities"}
                 />
               <VictoryAxis
+                tickLabelComponent={<VictoryLabel textAnchor="start" x={4} />}
                 dependentAxis
                 tickFormat={(y) => {
                   return `$${y}`;
                 }}
                 fixLabelOverlap={true}
                 label={"Median Rent"}
-              />
+                style={{ 
+                  tickLabels: { 
+                    fontSize: 10, 
+                    fill: "green", 
+                  }, 
+                }}
+                />
               <VictoryBar
-                barRatio={0.8}
+                alignment={"middle"}
+                barRatio={.8}
                 labelComponent={
                   <VictoryTooltip
                     cornerRadius={(d) => d.x > 6 ? 0 : 20}
                     pointerLength={(d) => d.y > 0 ? 5 : 20}
                     flyoutStyle={{
                       stroke: (d) => d.x === 10 ?
-                        "tomato" : "black"
+                        "tomato" : "black",
                     }}
+                    dy={-60}
                   />}
-                data={cities.map((city) => { return { city: city.city_name_short, rent: typeof city.rent_cost === 'string' ? Math.floor(city.rent_cost.replace(/[,\s]/,"")) : city.rent_cost, label: `${city.city_name_short}`} })}
+                data={cities.map((city) => { 
+                  return { 
+                    city: city.city_name_short, 
+                    rent: typeof city.rent_cost === 'string' ? Math.floor(city.rent_cost.replace(/[,\s]/,"")) : city.rent_cost, 
+                    label: `Rent: ${typeof city.rent_cost === 'string' ? `$${city.rent_cost.slice(0, city.rent_cost.length-3)}` : `$${Math.floor(city.rent_cost)}`}`
+                  } 
+                })}
                 x={"city"}
                 y={"rent"}
                 animate={{
@@ -106,7 +123,7 @@ class CompareBar extends Component {
                 style={{
                   data: {fill: "tomato"}, labels: {fill: "tomato"}
                 }}
-                size={(datum, active) => active ? 5 : 3}
+                // size={(datum, active) => active ? 5 : 3}
               />
             </VictoryChart>
           </div>
@@ -116,4 +133,4 @@ class CompareBar extends Component {
   }
 }
 
-export default CompareBar;
+export default CompareRentBar;
