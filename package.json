@@ -29,6 +29,7 @@
     "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^15.4.2",
     "request": "^2.81.0",
+    "victory": "^0.26.0",
     "yql": "^1.0.2"
   }
 }
