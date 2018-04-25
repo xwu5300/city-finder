@@ -1,5 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ItemTypes } from './constants.js';
+import { DragSource } from 'react-dnd';
+
+const cardSource = {
+  beginDrag(props) {
+    console.log('city being dragged is', props.city.city_name_short);
+    return props.city;
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
 
 class CityCard extends React.Component {
   constructor(props) {
@@ -20,6 +36,7 @@ class CityCard extends React.Component {
   }
 
   render() {
+    const { connectDragSource, isDragging } = this.props;
     const city = this.props.city;
     const style = {
       backgroundImage: "url(" + city.image_url + ")",
@@ -30,7 +47,7 @@ class CityCard extends React.Component {
     };
     const popString = this.stylePopulation(city.population);
 
-    return (
+    return connectDragSource(
       <div
         className="cityPanel"
         value={city.city_name_long}
@@ -60,9 +77,14 @@ class CityCard extends React.Component {
             </h2>
           </div>
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
     );
   }
 };
 
-export default CityCard;
+export default DragSource(ItemTypes.CARD, cardSource, collect)(CityCard);
