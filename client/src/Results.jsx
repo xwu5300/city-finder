@@ -68,16 +68,15 @@ class Results extends React.Component {
       return (
         <div className="cities">
           {display.map(city => {
-            let style = {
-              backgroundImage: `url(./images/${city.id}.jpg)`,
-              width: "300px",
-              height: "200px",
-              backgroundPosition: "center",
-              backgroundSize: "cover"
-            };
+            // let style = {
+            //   backgroundImage: `url(./images/${city.id}.jpg)`,
+            //   width: "300px",
+            //   height: "200px",
+            //   backgroundPosition: "center",
+            //   backgroundSize: "cover"
+            // };
 
             var popString = this.stylePopulation(city.population);
-            console.log(display);
             return (
               <div id="temp" key={city._id}>
               <CityCard city={city} handleClick={this.deleteOrSave}/>
