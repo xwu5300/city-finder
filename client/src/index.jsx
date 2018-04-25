@@ -93,7 +93,7 @@ class App extends React.Component {
           </h1>
         </header>
         <div className="main columns">
-          <div className="column is-one-quarter">
+          <div className="column is-one-quarter" style={{"background-color":"red"}}>
             <Search
               getCities={this.getCities}
               getFaves={this.getFaves}
