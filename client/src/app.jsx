@@ -8,13 +8,12 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import Search from "./Search.jsx";
 import Results from "./Results.jsx";
 import {ItemTypes} from "./constants.js";
-import CityComparison from "./CityComparison.jsx";
+import CityHeadToHead from "./CityHeadToHead.jsx";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //selected cities for comparison should be in state: {left: ___, right: ___}
       cities: [],
       favorites: [],
       showFavorites: false,
@@ -40,7 +39,7 @@ class App extends React.Component {
     this.setState({
       selectedCities: Object.assign({}, this.state.selectedCities, {[position]: city})
     })
-    console.log(this.state.selectedCities);
+    // console.log(this.state.selectedCities);
   }
 
   toggleFav() {
@@ -92,9 +91,9 @@ class App extends React.Component {
       .then(weatherData => {
         // Currently this function (fetchWeather in server/index.js) is not fast enough to use
           //at time of render. Therefore, it is not being used. 
-        console.log("weatherData from API call:", weatherData);
-        console.log("state after getCities and get weather: ", this.state);
-        console.log("time at end:");
+        // console.log("weatherData from API call:", weatherData);
+        // console.log("state after getCities and get weather: ", this.state);
+        // console.log("time at end:");
       })
       .catch(err => {
         console.log(err);
@@ -128,9 +127,7 @@ class App extends React.Component {
             />
           </div>
           <div>
-            <CityComparison city={this.state.selectedCities.left} handleDrop={this.handleDrop} position="left" key="left"/>
-            <CityComparison city={this.state.selectedCities.right} handleDrop={this.handleDrop} position="right" key="right"/>
-            <pre>{JSON.stringify(this.state.selectedCities.left)}</pre>
+            <CityHeadToHead/>
           </div>
         </div>
       </div>

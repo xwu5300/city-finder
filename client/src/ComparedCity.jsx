@@ -16,7 +16,7 @@ function collect(connect, monitor) {
   };
 }
 
-class CityComparison extends React.Component {
+class ComparedCity extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -24,12 +24,18 @@ class CityComparison extends React.Component {
   render() {
     const {connectDropTarget, isOver, city, position} = this.props;
     return connectDropTarget(
-      <div style={{border: "dotted 1px black"}}>
-      <pre>THIS IS THE {position} BOX</pre>
-      <h1>{city ? city.city_name_short : ''}</h1>
+      <div style={{
+        border: "dotted 2px black",
+        height: '250px',
+        width: "45%",
+        display: 'inline-block',
+        float: 'left'
+      }}>
+        <pre>THIS IS THE {position} BOX</pre>
+        <h1>{city ? city.city_name_short : ''}</h1>
       </div>
     )
   }
 };
 
-export default DropTarget(ItemTypes.CARD, comparisonTarget, collect)(CityComparison);
+export default DropTarget(ItemTypes.CARD, comparisonTarget, collect)(ComparedCity);

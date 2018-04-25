@@ -77,6 +77,11 @@ class CityCard extends React.Component {
             </h2>
           </div>
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
     );
   }
