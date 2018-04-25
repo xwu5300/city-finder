@@ -8,6 +8,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import Search from "./Search.jsx";
 import Results from "./Results.jsx";
 import {ItemTypes} from "./constants.js";
+import CityComparison from "./CityComparison.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -113,6 +114,9 @@ class App extends React.Component {
               setInfo={this.setInfo}
               showFavorites={this.state.showFavorites}
             />
+          </div>
+          <div>
+            <CityComparison/>
           </div>
         </div>
       </div>
