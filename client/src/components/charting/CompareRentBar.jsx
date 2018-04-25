@@ -54,10 +54,10 @@ class CompareRentBar extends Component {
         <div style={{ width: `500px`, margin: `auto`, paddingTop: '20' }}>
           <div>
             <VictoryChart
-              domainPadding={40}
-              theme={VictoryTheme.material}
+              domainPadding={70}
+              theme={VictoryTheme.greyscale}
               animate={{ duration: 500, easing: "bounce"}}
-              padding={{ left: 60, right: 20, bottom: 50, top: 50 }}
+              padding={{ left: 70, right: 20, bottom: 50, top: 50 }}
               containerComponent={
                 <VictoryVoronoiContainer
                 />}
@@ -65,7 +65,7 @@ class CompareRentBar extends Component {
               <VictoryLabel 
                 text={`Rent Comparison: ${cities[0].city_name_short} vs. ${cities[1].city_name_short}`} 
                 verticalAnchor={"end"}
-                x={80}
+                x={120}
                 y={30}
                 />
               <VictoryAxis
@@ -73,23 +73,24 @@ class CompareRentBar extends Component {
                 label={"Cities"}
                 />
               <VictoryAxis
-                tickLabelComponent={<VictoryLabel textAnchor="start" x={4} />}
+                tickLabelComponent={<VictoryLabel textAnchor="start" x={32} />}
+                axisLabelComponent={<VictoryLabel dy={-24} />}
                 dependentAxis
                 tickFormat={(y) => {
                   return `$${y}`;
                 }}
                 fixLabelOverlap={true}
                 label={"Median Rent"}
-                style={{ 
-                  tickLabels: { 
-                    fontSize: 10, 
-                    fill: "green", 
-                  }, 
+                style={{
+                  tickLabels: {
+                    fontSize: 10,
+                    fill: "green",
+                  },
                 }}
-                />
+              />
               <VictoryBar
                 alignment={"middle"}
-                barRatio={.8}
+                barRatio={.7}
                 labelComponent={
                   <VictoryTooltip
                     cornerRadius={(d) => d.x > 6 ? 0 : 20}
@@ -104,7 +105,7 @@ class CompareRentBar extends Component {
                   return { 
                     city: city.city_name_short, 
                     rent: typeof city.rent_cost === 'string' ? Math.floor(city.rent_cost.replace(/[,\s]/,"")) : city.rent_cost, 
-                    label: `Rent: ${typeof city.rent_cost === 'string' ? `$${city.rent_cost.slice(0, city.rent_cost.length-3)}` : `$${Math.floor(city.rent_cost)}`}`
+                    label: `Rent: $${city.rent_cost}`
                   } 
                 })}
                 x={"city"}
@@ -134,3 +135,6 @@ class CompareRentBar extends Component {
 }
 
 export default CompareRentBar;
+
+
+//${typeof city.rent_cost === 'string' ? `$${city.rent_cost.slice(0, city.rent_cost.length-3)}` : `$${Math.floor(city.rent_cost)}

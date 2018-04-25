@@ -63,5 +63,5 @@ app.get('/weather', (req, res) => {
 });
 
 app.listen(process.env.PORT || 3005, () => {
-  console.log('server listening on 3000!')
+  console.log('server listening on 3005!')
 })
