@@ -39,10 +39,7 @@ class Search extends React.Component {
   clearFilters() {
     var buttons = document.getElementsByTagName("button");
     for (var key in buttons) {
-      if (
-        buttons[key].style &&
-        buttons[key].style.backgroundColor === "dodgerblue"
-      ) {
+      if (buttons[key].style && buttons[key].style.backgroundColor === "dodgerblue") {
         buttons[key].style.backgroundColor = "white";
       }
     }
