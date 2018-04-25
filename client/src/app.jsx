@@ -18,7 +18,10 @@ class App extends React.Component {
       cities: [],
       favorites: [],
       showFavorites: false,
-      selectedCity: ''
+      selectedCities: {
+        left: '',
+        right: ''
+      }
     };
     this.getCities = this.getCities.bind(this);
     this.getWeather = this.getWeather.bind(this);
@@ -33,10 +36,11 @@ class App extends React.Component {
     });
   }
 
-  handleDrop(city) {
+  handleDrop(city, position) {
     this.setState({
-      selectedCity: city
-    });
+      selectedCities: Object.assign({}, this.state.selectedCities, {[position]: city})
+    })
+    console.log(this.state.selectedCities);
   }
 
   toggleFav() {
@@ -124,8 +128,9 @@ class App extends React.Component {
             />
           </div>
           <div>
-            <CityComparison city={this.state.selectedCity} handleDrop={this.handleDrop}/>
-            <pre>{JSON.stringify(this.state.selectedCity)}</pre>
+            <CityComparison city={this.state.selectedCities.left} handleDrop={this.handleDrop} position="left" key="left"/>
+            <CityComparison city={this.state.selectedCities.right} handleDrop={this.handleDrop} position="right" key="right"/>
+            <pre>{JSON.stringify(this.state.selectedCities.left)}</pre>
           </div>
         </div>
       </div>

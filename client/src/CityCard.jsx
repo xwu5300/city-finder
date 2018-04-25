@@ -6,7 +6,7 @@ import { DragSource } from 'react-dnd';
 const cardSource = {
   beginDrag(props) {
     console.log('city being dragged is', props.city.city_name_short);
-    return {cityDetails: props.city};
+    return props.city;
   }
 };
 
