@@ -5,8 +5,7 @@ import { ItemTypes } from "./constants";
 
 const comparisonTarget = {
   drop(props, monitor) {
-    console.log('received props of', props); //get props somehow???
-    console.log('got item of', monitor.getItem());
+    props.handleDrop(monitor.getItem());
   }
 };
 
@@ -20,12 +19,18 @@ function collect(connect, monitor) {
 class CityComparison extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      cityDetails: {}
+    };
+    // this.updateOnDrag = this.updateOnDrag.bind(this);
+    // this.handleDrop = this.props.handleDrop.bind(this);
   }
 
   render() {
     const {connectDropTarget, isOver} = this.props;
     return connectDropTarget(
       <div style={{border: "dotted 1px black"}}>
+      <pre>{JSON.stringify(this.props.city)}</pre>
       <h1>DRAG HERE SON</h1>
       </div>
     )

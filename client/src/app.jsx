@@ -17,17 +17,25 @@ class App extends React.Component {
       //selected cities for comparison should be in state: {left: ___, right: ___}
       cities: [],
       favorites: [],
-      showFavorites: false
+      showFavorites: false,
+      selectedCity: ''
     };
     this.getCities = this.getCities.bind(this);
     this.getWeather = this.getWeather.bind(this);
     this.toggleFav = this.toggleFav.bind(this);
     this.setInfo = this.setInfo.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
   }
 //gets weather data for each city on load
   componentDidMount() {
     this.getCities({}, () => {
       this.getWeather();
+    });
+  }
+
+  handleDrop(city) {
+    this.setState({
+      selectedCity: city
     });
   }
 
@@ -116,7 +124,8 @@ class App extends React.Component {
             />
           </div>
           <div>
-            <CityComparison/>
+            <CityComparison city={this.state.selectedCity} handleDrop={this.handleDrop}/>
+            <pre>{JSON.stringify(this.state.selectedCity)}</pre>
           </div>
         </div>
       </div>
