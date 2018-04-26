@@ -20,16 +20,23 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "bulma": "^0.6.2",
+    "canvas": "^1.6.10",
     "cron": "^1.3.0",
+    "d3": "^5.1.0",
     "express": "^4.15.0",
     "jquery": "^3.1.1",
     "mongoose": "^4.9.6",
     "react": "^15.4.2",
+    "react-d3-cloud": "^0.6.0",
     "react-dnd": "^2.6.0",
     "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^15.4.2",
     "request": "^2.81.0",
+<<<<<<< HEAD
     "victory": "^0.26.0",
+=======
+    "twitter": "^1.7.1",
+>>>>>>> tweetCloud
     "yql": "^1.0.2"
   }
 }

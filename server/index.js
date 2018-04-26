@@ -4,21 +4,12 @@ const bodyParser = require('body-parser');
 const { fetchWeather, makeQueryString } = require(path.join(__dirname + '/../database/helpers.js'));
 const CronJob = require('cron').CronJob;
 const DB = require(path.join(__dirname + '/../database/database.js'));
+const { getTweetTrends } = require('./wordcloud.js');
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(bodyParser.json());
-
-// let timer = new CronJob({
-//   cronTime: '00 * * * * *',
-//   onTick: function () {
-//     // console.log('in scheduler factory')
-//     console.log('tick');
-//   },
-//   start: true,
-//   timeZone: 'America/New_York'
-// });
 
 app.get('/faves', (req, res) => {
   DB.getFavesFromDB((err, data) => {
@@ -62,6 +53,17 @@ app.get('/weather', (req, res) => {
   })
 });
 
-app.listen(process.env.PORT || 3005, () => {
-  console.log('server listening on 3005!')
+app.get('/twitter', (req, res) => {
+  // console.log('city name is', req)
+  DB.getYahooId(req.query.cityName)
+      .then(yahooId => {
+        console.log('yahooId is', yahooId)
+        return getTweetTrends(yahooId)
+      })
+      .then(trends => res.send(trends))
+      .catch(err => console.log(err));
+});
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log('server listening on 3000!')
 })

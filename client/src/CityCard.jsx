@@ -38,13 +38,13 @@ class CityCard extends React.Component {
   render() {
     const { connectDragSource, isDragging } = this.props;
     const city = this.props.city;
-    const style = {
-      backgroundImage: "url(" + city.image_url + ")",
+    let style = {
+      backgroundImage: `url(./images/${city.id}.jpg)`,
       width: "300px",
       height: "200px",
       backgroundPosition: "center",
       backgroundSize: "cover"
-    };
+    }
     const popString = this.stylePopulation(city.population);
 
     return connectDragSource(

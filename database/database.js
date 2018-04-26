@@ -109,11 +109,17 @@ let getFavesFromDB = (callback) => {
   })
 }
 
-
-
-
+const getYahooId = (city_name_short) => {
+  // console.log('city name is', city_name_short);
+  return City.find({'city_name_short': city_name_short}).exec()
+    .then(doc => {
+      return doc[0].yahoo_weather_id;
+    })
+    .catch(err => console.log(err))
+}
 
 exports.queryDB = queryDB;
 exports.getFavesFromDB = getFavesFromDB;
 exports.addToDB = addToDB;
 exports.deleteFromDB = deleteFromDB;
+exports.getYahooId = getYahooId;
