@@ -32,11 +32,8 @@
     "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^15.4.2",
     "request": "^2.81.0",
-<<<<<<< HEAD
     "victory": "^0.26.0",
-=======
     "twitter": "^1.7.1",
->>>>>>> tweetCloud
     "yql": "^1.0.2"
   }
 }
