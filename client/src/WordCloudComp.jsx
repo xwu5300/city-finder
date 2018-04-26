@@ -1,6 +1,4 @@
 import React from 'react';
-// import * as d3 from 'd3';
-// import Cloud from 'd3-cloud';
 import axios from 'axios';
 import WordCloud from 'react-d3-cloud';
 
@@ -13,7 +11,7 @@ const getRandomInt = (min, max) => {
 }
 
 const rotate = (word) => {
-  if (word.value === 5) {
+  if (word.value === 5) { //default value given if twitter gives a null weight
     return getRandomInt(0, 90);
   }
   else return word.value % 90;
