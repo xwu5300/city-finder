@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const { fetchWeather, makeQueryString } = require(path.join(__dirname + '/../database/helpers.js'));
 const CronJob = require('cron').CronJob;
 const DB = require(path.join(__dirname + '/../database/database.js'));
+const twitter = require('./twitter.js');
+const { getCloud } = require('./helpers.js');
 
 const app = express();
 
@@ -61,6 +63,12 @@ app.get('/weather', (req, res) => {
     }
   })
 });
+
+app.get('/twitter', (req, res) => {
+  getCloud()
+    .then(words => res.send(words))
+    .catch(err => console.log(err));
+})
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('server listening on 3000!')

@@ -28,11 +28,13 @@
     "express": "^4.15.0",
     "jquery": "^3.1.1",
     "mongoose": "^4.9.6",
+    "node-tweet-stream": "^2.0.3",
     "react": "^15.4.2",
     "react-dnd": "^2.6.0",
     "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^15.4.2",
     "request": "^2.81.0",
+    "twitter": "^1.7.1",
     "yql": "^1.0.2"
   }
 }
