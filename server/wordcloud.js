@@ -10,26 +10,26 @@ const client = new Twitter({
   access_token_secret: access_token_secret
 });
 
-const params = { //CHANGE THIS LATER
-  id: 2383660 //query DB for yahoo weather ID
-};
-
-const tweetVolumeAdjustment = 800;
-
-const getTweetTrends = () => { //trends seem to similar across cities...maybe x-ref against worldwide?
+const getTweetTrends = (yahooId) => { //trends seem to similar across cities...maybe x-ref against worldwide?
+  const params = {id: yahooId};
   return client.get('trends/place.json?', params)
     .then(resp => {
       console.log(resp[0].locations[0].name);
       const trendsAndVolume = resp[0].trends.reduce((trends, tweet) => {
         trends.push({
           text: tweet.name,
-          size: (tweet.tweet_volume || 8000) / tweetVolumeAdjustment //default size when size is null
+          size: adjustTweetVolume(tweet.tweet_volume) //default size when size is null
         });
         return trends;
       }, []);
       return trendsAndVolume;
     })
     .catch(err => console.log(err))
+};
+
+const adjustTweetVolume = (tweetVol) => {
+  //return 10 if tweetVol is null, otherwise cap vol at 1000
+  return !tweetVol ? 5 : tweetVol;
 };
 
 const getCloud = () => {

@@ -54,10 +54,15 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/twitter', (req, res) => {
-  getTweetTrends()
-    .then(trends => res.send(trends))
-    .catch(err => console.log(err));
-})
+  // console.log('city name is', req)
+  DB.getYahooId(req.query.cityName)
+      .then(yahooId => {
+        console.log('yahooId is', yahooId)
+        return getTweetTrends(yahooId)
+      })
+      .then(trends => res.send(trends))
+      .catch(err => console.log(err));
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('server listening on 3000!')
