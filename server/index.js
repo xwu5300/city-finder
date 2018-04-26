@@ -4,23 +4,12 @@ const bodyParser = require('body-parser');
 const { fetchWeather, makeQueryString } = require(path.join(__dirname + '/../database/helpers.js'));
 const CronJob = require('cron').CronJob;
 const DB = require(path.join(__dirname + '/../database/database.js'));
-const twitter = require('./twitter.js');
-const { getCloud } = require('./helpers.js');
+const { getTweetTrends } = require('./wordcloud.js');
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(bodyParser.json());
-
-// let timer = new CronJob({
-//   cronTime: '00 * * * * *',
-//   onTick: function () {
-//     // console.log('in scheduler factory')
-//     console.log('tick');
-//   },
-//   start: true,
-//   timeZone: 'America/New_York'
-// });
 
 app.get('/faves', (req, res) => {
   DB.getFavesFromDB((err, data) => {
@@ -65,8 +54,8 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/twitter', (req, res) => {
-  getCloud()
-    .then(words => res.send(words))
+  getTweetTrends()
+    .then(trends => res.send(trends))
     .catch(err => console.log(err));
 })
 
