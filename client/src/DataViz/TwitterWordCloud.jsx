@@ -33,11 +33,7 @@ class TwitterWordCloud extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (wordsArrsEqual(this.props.words, nextProps.words)) {
-      return false;
-    } else {
-      return true;
-    }
+    return wordsArrsEqual(this.props.words, nextProps.words);
   }
 
   render() {
