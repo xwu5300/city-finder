@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { DropTarget } from 'react-dnd';
-import { ItemTypes } from "./constants";
+import { ItemTypes } from "../constants";
 
 const comparisonTarget = {
   drop(props, monitor) {
@@ -16,7 +16,7 @@ function collect(connect, monitor) {
   };
 }
 
-class ComparedCity extends React.Component {
+class CityDropZone extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -38,4 +38,4 @@ class ComparedCity extends React.Component {
   }
 };
 
-export default DropTarget(ItemTypes.CARD, comparisonTarget, collect)(ComparedCity);
+export default DropTarget(ItemTypes.CARD, comparisonTarget, collect)(CityDropZone);

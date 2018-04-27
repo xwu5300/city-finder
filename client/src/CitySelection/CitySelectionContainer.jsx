@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import CityCard from "./CityCard.jsx";
 
-class Results extends React.Component {
+class CitySelectionContainer extends React.Component {
   constructor(props) {
     super(props);
     this.stylePopulation = this.stylePopulation.bind(this);
@@ -95,4 +95,4 @@ class Results extends React.Component {
   }
 }
 
-export default Results;
+export default CitySelectionContainer;

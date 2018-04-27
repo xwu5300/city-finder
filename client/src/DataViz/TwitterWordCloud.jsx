@@ -17,7 +17,7 @@ const rotate = (word) => {
   else return word.value % 90;
 };
 
-class WordCloudComp extends React.Component {
+class TwitterWordCloud extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,4 +58,4 @@ class WordCloudComp extends React.Component {
   }
 }
 
-export default WordCloudComp;
+export default TwitterWordCloud;

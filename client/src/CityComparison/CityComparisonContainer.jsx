@@ -1,8 +1,8 @@
 import React from 'react';
-import ComparedCity from './ComparedCity.jsx';
-import DataViz from './DataViz.jsx';
+import CityDropZone from './CityDropZone.jsx';
+import CityComparisonDataViz from './CityComparisonDataViz.jsx';
 
-class CityHeadToHead extends React.Component {
+class CityComparisonContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -25,12 +25,12 @@ class CityHeadToHead extends React.Component {
     return (
     <div>
       <div>
-        <ComparedCity
+        <CityDropZone
           city={this.state.selectedCities.left}
           handleDrop={this.handleDrop}
           position="left" key="left"
         />
-        <ComparedCity
+        <CityDropZone
           city={this.state.selectedCities.right}
           handleDrop={this.handleDrop}
           position="right" key="right"
@@ -39,11 +39,11 @@ class CityHeadToHead extends React.Component {
       <br></br>
       <br></br>
       <div>
-        <DataViz left={left} right={right}/>
+        <CityComparisonDataViz left={left} right={right}/>
       </div>
     </div>
     )
   }
 }
 
-export default CityHeadToHead;
+export default CityComparisonContainer;

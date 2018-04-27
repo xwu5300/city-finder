@@ -1,9 +1,9 @@
 import React from 'react';
 
-import CompareRentBar from './components/charting/CompareRentBar.jsx';
+import CompareRentBar from '../DataViz/CompareRentBar.jsx';
 
 
-class DataViz extends React.Component {
+class CityComparisonDataViz extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -26,4 +26,4 @@ class DataViz extends React.Component {
   }
 }
 
-export default DataViz;
+export default CityComparisonDataViz;
