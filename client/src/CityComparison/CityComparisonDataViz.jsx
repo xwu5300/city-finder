@@ -10,7 +10,7 @@ class CityComparisonDataViz extends React.Component {
 
   render() {
     const {left, right} = this.props; //left and right are the left and right city objects
-    console.log('cities as props', this.props.cities);
+    // console.log('cities as props', this.props.cities);
 
     const CompareRent = left !== '' && right !== '' ? (<CompareRentBar cities={[left, right]}/>) : (<p>'Nothing to see here'</p>);
     return (

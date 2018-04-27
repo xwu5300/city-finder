@@ -11,9 +11,11 @@ const client = new Twitter({
 
 const getTweetTrends = (yahooId) => { //trends seem to similar across cities...maybe x-ref against worldwide?
   const params = {id: yahooId};
+  console.log('about to try to make request to twitter');
   return client.get('trends/place.json?', params)
     .then(resp => {
-      console.log(resp[0].locations[0].name);
+      // console.log('response from twitter is', resp);
+      // console.log('inside server, searching twitter for', resp[0].locations[0].name);
       const trendsAndVolume = resp[0].trends.reduce((trends, tweet) => {
         trends.push({
           text: tweet.name,
@@ -23,7 +25,9 @@ const getTweetTrends = (yahooId) => { //trends seem to similar across cities...m
       }, []);
       return trendsAndVolume;
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log('err from twitter call is', err);
+    })
 };
 
 const adjustTweetVolume = (tweetVol) => {

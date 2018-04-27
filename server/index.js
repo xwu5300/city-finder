@@ -20,6 +20,7 @@ app.get('/faves', (req, res) => {
 
 app.post('/addFaves', (req, res) => {
   DB.addToDB(req.body)
+  res.send('ok');
 })
 
 app.post('/deleteFaves', (req, res) => {
@@ -54,10 +55,10 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/twitter', (req, res) => {
-  // console.log('city name is', req)
+  console.log('inside express, hitting twitter endpoint for', req.query.cityName)
   DB.getYahooId(req.query.cityName)
       .then(yahooId => {
-        console.log('yahooId is', yahooId)
+        // console.log('yahooId is', yahooId)
         return getTweetTrends(yahooId)
       })
       .then(trends => res.send(trends))

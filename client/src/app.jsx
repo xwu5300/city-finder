@@ -62,7 +62,7 @@ class App extends React.Component {
         params: state
       })
       .then(results => {
-        console.log('got results from getCities!')
+        // console.log('got results from getCities!')
         this.setState(
           {
             cities: results.data
