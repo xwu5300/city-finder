@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ItemTypes } from './constants.js';
+import { ItemTypes } from '../constants.js';
 import { DragSource } from 'react-dnd';
 
 const cardSource = {

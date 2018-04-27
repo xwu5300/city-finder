@@ -6,10 +6,10 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 
-import Search from "./Search.jsx";
-import Results from "./Results.jsx";
+import Filter from "./Filter.jsx";
+import CitySelectionContainer from "./CitySelection/CitySelectionContainer.jsx";
 import {ItemTypes} from "./constants.js";
-import CityHeadToHead from "./CityHeadToHead.jsx";
+import CityComparisonContainer from "./CityComparison/CityComparisonContainer.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -112,7 +112,7 @@ class App extends React.Component {
         </header>
         <div className="main columns">
           <div className="column is-one-quarter">
-            <Search
+            <Filter
               getCities={this.getCities}
               getFaves={this.getFaves}
               showFavorites={this.state.showFavorites}
@@ -121,7 +121,7 @@ class App extends React.Component {
             />
           </div>
           <div className="column is-three-quarters">
-            <Results
+            <CitySelectionContainer
               cities={this.state.cities}
               favorites={this.state.favorites}
               setInfo={this.setInfo}
@@ -129,7 +129,7 @@ class App extends React.Component {
             />
           </div>
           <div>
-            <CityHeadToHead/>
+            <CityComparisonContainer/>
           </div>
         </div>
       </div>
