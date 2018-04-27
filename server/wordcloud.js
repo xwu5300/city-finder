@@ -1,4 +1,3 @@
-var Canvas = require("canvas");
 var cloud = require("d3-cloud");
 const Twitter = require('twitter');
 const { consumer_key, consumer_secret, access_token_key, access_token_secret } = require('../config.js');
