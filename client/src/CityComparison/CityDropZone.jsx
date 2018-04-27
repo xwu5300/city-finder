@@ -29,9 +29,9 @@ class CityDropZone extends React.Component {
         height: '250px',
         width: "45%",
         display: 'inline-block',
-        float: 'left'
+        float: 'left',
+        backgroundImage: `url(./images/${city.id}.jpg)`
       }}>
-        <pre>THIS IS THE {position} BOX</pre>
         <h1>{city ? city.city_name_short : ''}</h1>
       </div>
     )
