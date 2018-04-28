@@ -8,7 +8,8 @@ class CitySelectionContainer extends React.Component {
     super(props);
     this.state = {
       selectedCity: '',
-      frequency_list: []
+      frequency_list: [],
+      twitterFetchInProgress: false
     };
     this.stylePopulation = this.stylePopulation.bind(this);
     this.deleteOrSave = this.deleteOrSave.bind(this);
@@ -21,9 +22,6 @@ class CitySelectionContainer extends React.Component {
       .post("/addFaves", {
         city: city
       })
-      // .then(res => {
-      //   res.end();
-      // })
       .catch(err => {
         console.log("ERR IN SAVE CITY CLIENT:", err);
       });
@@ -63,16 +61,15 @@ class CitySelectionContainer extends React.Component {
   }
 
   showCityDetails(cityName) {
-    // console.log('cityName inside city selection container is', cityName);
     this.setState({
       selectedCity: cityName
     }, () => {
-      // console.log('selected city is', this.state.selectedCity);
       this.getTweets(this.state.selectedCity);
     });
   }
 
   getTweets(cityName) {
+    this.setState({twitterFetchInProgress: true});
     const params = {
       cityName: cityName //matches city_name_short from city props
     }
@@ -84,7 +81,8 @@ class CitySelectionContainer extends React.Component {
           return word
         });
         this.setState({
-          frequency_list: frequency_list
+          frequency_list: frequency_list,
+          twitterFetchInProgress: false
         });
       })
       .catch(err => console.log(err));
@@ -119,6 +117,7 @@ class CitySelectionContainer extends React.Component {
                 handleClick={this.deleteOrSave}
                 showDetails={this.showCityDetails}
                 twitterWC={twitterWC}
+                twitterLoading={this.state.twitterFetchInProgress}
               />
             </div>
             );
