@@ -1,8 +1,5 @@
 config.js
-<<<<<<< HEAD
-.DS_Store
-=======
->>>>>>> deploy
+city-finder.zip
 client/.DS_Store
 .DS_Store
 node_modules
