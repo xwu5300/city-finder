@@ -11,7 +11,9 @@ const customStyles = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
+    backgroundColor       : '#18121E',
+
   }
 };
 
@@ -46,7 +48,6 @@ class CityCard extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.handleUserNameInput = this.handleUserNameInput.bind(this);
   }
 
 
@@ -64,13 +65,6 @@ class CityCard extends React.Component {
 
   closeModal() {
     this.setState({ modalIsOpen: false });
-  }
-
-  handleUserNameInput(ev) {
-    this.setState({
-      username: ev.target.value
-    });
-    console.log('username', this.state.username);
   }
   //end modal methods
 

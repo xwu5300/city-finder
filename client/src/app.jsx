@@ -22,6 +22,15 @@ const styles = {
   },
 };
 
+const filter = {
+  region: ["","Northeast", "Southeast", "Midwest", "Southwest", "Rockies", "Pacific"],
+  climate: ["","cold", "mild", "hot"],
+  rent: ["","low", "medium", "high"],
+  by_ocean: ["TRUE"],
+  by_mountains: ["TRUE"],
+  by_lake: ["TRUE"],
+  city_size: ["","small", "medium", "big"],
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -30,13 +39,11 @@ class App extends React.Component {
       cities: [],
       favorites: [],
       showFavorites: false,
-      filterCategories: {
-        CostOfLiving: 1,
-        Weather: 1,
-        Region: 1,
-        Environment: 1,
-        MetroSize: 1,
-      },
+      CostOfLiving: 0,
+      Weather: 0,
+      Region: 0,
+      Environment: 0,
+      MetroSize: 0,
       selectedCities: {
         left: '',
         right: '',
@@ -47,6 +54,7 @@ class App extends React.Component {
     this.toggleFav = this.toggleFav.bind(this);
     this.setInfo = this.setInfo.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 //gets weather data for each city on load
   componentDidMount() {
@@ -58,7 +66,8 @@ class App extends React.Component {
   handleDrop(city, position) {
     this.setState({
       selectedCities: Object.assign({}, this.state.selectedCities, {[position]: city})
-    })
+    }
+  )
     // console.log(this.state.selectedCities);
   }
 
@@ -74,12 +83,65 @@ class App extends React.Component {
     });
   }
 
-  handleChange(event, index, value) {
-    console.log(event);
-    console.log(event.target.innerText);
-    // this.setState({
+  handleChange(name, event, index, value) {
+    this.setState({
+      [name]: value
+    }, () => {
+      let array = [
+        "CostOfLiving",
+        "Weather",
+        "Region",
+        "Environment",
+        "MetroSize"
+      ]
+  
+      let filterObject = {
+        region: [],
+        climate: [],
+        rent: [],
+        by_ocean: [],
+        by_mountains: [],
+        by_lake: [],
+        city_size: [],
+      }
+  
+      for (let i = 0; i < array.length; i++) {
+          if (array[i] === "CostOfLiving" && this.state.CostOfLiving !== 0) {
+            filterObject.rent = [filter.rent[this.state.CostOfLiving]];
+          }
+          if (array[i] === "Weather"  && this.state.Weather !== 0) {
+            filterObject.climate = [filter.climate[this.state.Weather]];
+          }
+          if (array[i] ==="Region"  && this.state.Region !== 0) {
+            filterObject.region = [filter.region[this.state.Region]];
+          }
+          if (array[i] === "Environment"  && this.state.Environment !== 0) {
+            if (this.state.Environment === 1) {
+              filterObject.by_ocean = ["TRUE"];
+              filterObject.by_mountains = [];
+              filterObject.by_lake = [];
+            }
+            if (this.state.Environment === 2) {
+              filterObject.by_ocean = [];
+              filterObject.by_mountains = ["TRUE"];
+              filterObject.by_lake = [];
+            }
+            if (this.state.Environment === 3) {
+              filterObject.by_ocean = [];
+              filterObject.by_mountains = [];
+              filterObject.by_lake = ["TRUE"];
+            }
+          }
+          if (array[i] === "MetroSize"  && this.state.MetroSize !== 0) {
+            filterObject.city_size = [filter.city_size[this.state.MetroSize]];
+          }
+      }
 
-    // })
+      console.log(filterObject);
+      this.getCities(JSON.stringify(filterObject));
+
+    })
+
   }
 
   // getCities will return the cities that match the query string
@@ -89,7 +151,7 @@ class App extends React.Component {
         params: state
       })
       .then(results => {
-        // console.log('got results from getCities!')
+        console.log('got results from getCities!', results);
         this.setState(
           {
             cities: results.data
@@ -139,29 +201,36 @@ class App extends React.Component {
               </span>
               <span className="filter">
                 Cost of Living:
-                <DropDownMenu value={this.state.filterCategories.CostOfLiving} style={styles} onChange={this.handleChange} className="CostOfLiving">
-                  <MenuItem value={1} primaryText="None" className="CostOfLiving"/>
-                  <MenuItem value={2} primaryText="Low" className="CostOfLiving"/>
-                  <MenuItem value={3} primaryText="Medium" className="CostOfLiving"/>
-                  <MenuItem value={4} primaryText="High" className="CostOfLiving"/>
+                <DropDownMenu value={this.state.CostOfLiving} style={styles} onChange={(event, index, value) => {
+                  this.handleChange("CostOfLiving", event, index, value);
+                }}>
+                  <MenuItem value={0} primaryText="None"/>
+                  <MenuItem value={1} primaryText="Low"/>
+                  <MenuItem value={2} primaryText="Medium"/>
+                  <MenuItem value={3} primaryText="High"/>
                 </DropDownMenu>
               </span>
 
               <span className="filter">
                 Weather:
-                <DropDownMenu value={this.state.filterCategories.Weather}>
-                  <MenuItem value={1} primaryText="None" />
-                  <MenuItem value={2} primaryText="Cold" />
-                  <MenuItem value={3} primaryText="Mild" />
-                  <MenuItem value={4} primaryText="Hot" />
+                <DropDownMenu value={this.state.Weather} onChange={(event, index, value) => {
+                  this.handleChange("Weather", event, index, value);
+                }}>
+                  <MenuItem value={0} primaryText="None" />
+                  <MenuItem value={1} primaryText="Cold" />
+                  <MenuItem value={2} primaryText="Mild" />
+                  <MenuItem value={3} primaryText="Hot" />
                 </DropDownMenu>
               </span>
 
               <span className="filter">
                 Region:
-                <DropDownMenu value={this.state.filterCategories.Region}>
-                  <MenuItem value={1} primaryText="None" />
-                  <MenuItem value={2} primaryText="NorthEast" />
+                <DropDownMenu value={this.state.Region} onChange={(event, index, value) => {
+                  this.handleChange("Region", event, index, value);
+                }}>
+                  <MenuItem value={0} primaryText="None" />
+                  <MenuItem value={1} primaryText="NorthEast" />
+                  <MenuItem value={2} primaryText="SouthEast" />
                   <MenuItem value={3} primaryText="MidWest" />
                   <MenuItem value={4} primaryText="SouthWest" />
                   <MenuItem value={5} primaryText="Rockies" />
@@ -171,21 +240,25 @@ class App extends React.Component {
 
               <span className="filter">
                 Environment:
-                <DropDownMenu value={this.state.filterCategories.Environment}>
-                  <MenuItem value={1} primaryText="None" />
-                  <MenuItem value={2} primaryText="Near the Ocean" />
-                  <MenuItem value={3} primaryText="In the Mountains" />
-                  <MenuItem value={4} primaryText="Near Major Lake" />
+                <DropDownMenu value={this.state.Environment} onChange={(event, index, value) => {
+                  this.handleChange("Environment", event, index, value);
+                }}>
+                  <MenuItem value={0} primaryText="None" />
+                  <MenuItem value={1} primaryText="Oceanside" />
+                  <MenuItem value={2} primaryText="Mountainous" />
+                  <MenuItem value={3} primaryText="Lake" />
                 </DropDownMenu>
               </span>
 
               <span className="filter">
                 Metro Size:
-                <DropDownMenu value={this.state.filterCategories.MetroSize}>
-                  <MenuItem value={1} primaryText="None" />
-                  <MenuItem value={2} primaryText="Small" />
-                  <MenuItem value={3} primaryText="Mid-size" />
-                  <MenuItem value={4} primaryText="Big" />
+                <DropDownMenu value={this.state.MetroSize} onChange={(event, index, value) => {
+                  this.handleChange("MetroSize", event, index, value);
+                }}>
+                  <MenuItem value={0} primaryText="None" />
+                  <MenuItem value={1} primaryText="Small" />
+                  <MenuItem value={2} primaryText="Mid-Size" />
+                  <MenuItem value={3} primaryText="Big" />
                 </DropDownMenu>
               </span>
             </header>
