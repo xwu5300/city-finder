@@ -75,7 +75,11 @@ class App extends React.Component {
   }
 
   handleChange(event, index, value) {
-    console.log(event.target);
+    console.log(event);
+    console.log(event.target.innerText);
+    // this.setState({
+
+    // })
   }
 
   // getCities will return the cities that match the query string
@@ -135,11 +139,11 @@ class App extends React.Component {
               </span>
               <span className="filter">
                 Cost of Living:
-                <DropDownMenu value={this.state.filterCategories.CostOfLiving} style={styles} onChange={this.handleChange}>
-                  <MenuItem value={1} primaryText="None" />
-                  <MenuItem value={2} primaryText="Low" />
-                  <MenuItem value={3} primaryText="Medium" />
-                  <MenuItem value={4} primaryText="High" />
+                <DropDownMenu value={this.state.filterCategories.CostOfLiving} style={styles} onChange={this.handleChange} className="CostOfLiving">
+                  <MenuItem value={1} primaryText="None" className="CostOfLiving"/>
+                  <MenuItem value={2} primaryText="Low" className="CostOfLiving"/>
+                  <MenuItem value={3} primaryText="Medium" className="CostOfLiving"/>
+                  <MenuItem value={4} primaryText="High" className="CostOfLiving"/>
                 </DropDownMenu>
               </span>
 
