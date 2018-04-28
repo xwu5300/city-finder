@@ -1,8 +1,4 @@
 config.js
-<<<<<<< HEAD
-.DS_Store
-=======
->>>>>>> deploy
 client/.DS_Store
 .DS_Store
 node_modules
