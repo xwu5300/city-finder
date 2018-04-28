@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "soda-seed": "node database/socrataHelpers.js"
@@ -29,6 +30,7 @@
     "jquery": "^3.1.1",
     "material-ui": "^0.20.0",
     "mongoose": "^4.9.6",
+    "nodemon": "^1.17.3",
     "react": "^15.4.2",
     "react-d3-cloud": "^0.6.0",
     "react-dnd": "^2.6.0",

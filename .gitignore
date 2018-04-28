@@ -1,5 +1,9 @@
 config.js
-client/dist/bundle.js
+<<<<<<< HEAD
+.DS_Store
+=======
+>>>>>>> deploy
 client/.DS_Store
+.DS_Store
 node_modules
 package-lock.json

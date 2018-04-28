@@ -97,14 +97,14 @@ Creates grid format to hold cities
 /* ====================================
   Sets the overlay the displays city info 
    ==================================== */ 
-.container .overlay {
+/* .container .overlay {
   position: absolute;
   height: 200px;
   width: 300px;
   opacity: 0;
   transition: .2s ease;
   background-color: rgb(228, 234, 236);
-}
+} */
 
 .city-name {
   font-family: Helvetica;
