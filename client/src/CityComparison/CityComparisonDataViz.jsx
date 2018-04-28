@@ -1,12 +1,8 @@
 import React from 'react';
 
-<<<<<<< HEAD:client/src/CityComparison/CityComparisonDataViz.jsx
 import CompareRentBar from '../DataViz/CompareRentBar.jsx';
-=======
-import CompareRentBar from './components/charting/CompareRentBar.jsx';
-import CompareCrimeBar from './components/charting/CompareCrimeBar.jsx';
-import CompareHistCOL from './components/charting/CompareHistCOL.jsx';
->>>>>>> data viz views complete:client/src/DataViz.jsx
+import CompareCrimeBar from '../DataViz/CompareCrimeBar.jsx';
+import CompareHistCOL from '../DataViz/CompareHistCOL.jsx';
 
 
 class CityComparisonDataViz extends React.Component {
