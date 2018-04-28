@@ -192,7 +192,7 @@ class App extends React.Component {
                 />
               </div> */}
               <div className="comparison">
-                <CityComparisonContainer/>
+                <CityComparisonContainer cities={this.state.cities}/>
               </div>
               {/* <div className="column is-three-quarters">
                 {this.state.cities.length && <UsDataOverview cities={this.state.cities}/>}
