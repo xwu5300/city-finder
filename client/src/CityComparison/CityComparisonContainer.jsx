@@ -9,7 +9,8 @@ class CityComparisonContainer extends React.Component {
       selectedCities: {
         left: '',
         right: ''
-      }
+      },
+      isDisplay: true,
     }
     this.handleDrop = this.handleDrop.bind(this);
   }
@@ -20,11 +21,21 @@ class CityComparisonContainer extends React.Component {
     })
   }
 
+  hideChart() {
+
+  }
+
   render() {
     const {left, right} = this.state.selectedCities;
+
     return (
     <div className="city-comparison-container">
       <div className="city-drop-zones">
+        <button className="bubble-map-viz">
+        </button>
+        <button className="hide-chart" onClick={()=>{this.setState({isDisplay: !this.state.isDisplay})}}>
+          hide
+        </button>
         <div>
         <CityDropZone
           city={this.state.selectedCities.left}
@@ -40,8 +51,8 @@ class CityComparisonContainer extends React.Component {
         />
         </div>
       </div>
-      <div>
-        <CityComparisonDataViz left={left} right={right}/>
+      <div className="city-data-viz">
+        <CityComparisonDataViz left={left} right={right} isDisplay={this.state.isDisplay}/>
       </div>
     </div>
     )

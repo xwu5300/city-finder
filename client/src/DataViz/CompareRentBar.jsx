@@ -51,8 +51,8 @@ class CompareRentBar extends Component {
     let cities = this.props.cities;
     return (
       <div>
-        <div style={{ width: `500px`, margin: `auto`, paddingTop: '20' }}>
-          <div>
+        <div style={{ width: `500px`, margin: `auto`, paddingTop: '20'}}>
+          <div style={{ backgroundColor: 'white'}}>
             <VictoryChart
               domainPadding={70}
               theme={VictoryTheme.greyscale}

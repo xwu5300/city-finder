@@ -45,10 +45,11 @@ class CityCard extends React.Component {
     const city = this.props.city;
     let style = {
       backgroundImage: `url(./images/${city.id}.jpg)`,
-      width: "300px",
-      height: "200px",
+      width: 'auto',
+      height: '375px',
       backgroundPosition: "center",
-      backgroundSize: "cover"
+      backgroundSize: "cover",
+      position: "relative",
     }
     const popString = this.stylePopulation(city.population);
 
@@ -59,25 +60,19 @@ class CityCard extends React.Component {
         style={style}
         onClick={() => this.props.handleClick(city)}
         key={city._id}
-      >
-        <div className="container">
-          <div className="overlay">
-            <h2 className="has-text-black has-text-weight-bold">
+        >
+
+        <div className="overlay">
+            {/* <h2>
               {city.city_name_short}, {city.state}
-            </h2>
-          </div>
-          <div className="info">
-            <h2 className="has-text-black has-text-weight-bold">
-              {city.city_name_short}, {city.state}
-            </h2>
-          </div>
-          <button name={city.city_name_short} onClick={this.handleClick}>See live twitter trends in this city!</button>
+            </h2> */}
         </div>
-        {/* <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br> */}
+        <div className="info">
+          <span className="city-name">{city.city_name_short}, {city.state}
+          <button name={city.city_name_short} onClick={this.handleClick}></button>
+          </span>
+        </div>
+
       </div>
     );
   }

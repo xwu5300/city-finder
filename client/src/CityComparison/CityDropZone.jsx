@@ -25,14 +25,18 @@ class CityDropZone extends React.Component {
     const {connectDropTarget, isOver, city, position} = this.props;
     return connectDropTarget(
       <div style={{
-        border: "dotted 2px black",
-        height: '250px',
-        width: "45%",
+        border: "solid 1px black",
+        height: 'auto',
+        width: "49%",
         display: 'inline-block',
-        float: 'left',
-        backgroundImage: `url(./images/${city.id}.jpg)`
+        float: 'right',
+        // backgroundImage: `url(./images/${city.id}.jpg)`,
+        backgroundPosition: "bottom",
+        backgroundSize: "cover"
       }}>
-        <h1>{city ? city.city_name_short : ''}</h1>
+      <div className="drop-city">
+        <span className="drop-city">{city ? city.city_name_short : ''}</span>
+      </div>
       </div>
     )
   }

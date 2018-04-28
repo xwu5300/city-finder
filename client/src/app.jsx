@@ -11,6 +11,17 @@ import CitySelectionContainer from "./CitySelection/CitySelectionContainer.jsx";
 import {ItemTypes} from "./constants.js";
 import CityComparisonContainer from "./CityComparison/CityComparisonContainer.jsx";
 import UsDataOverview from "./DataViz/UsDataOverview.jsx";
+import DropDownMenu from "material-ui/DropDownMenu";
+import MenuItem from 'material-ui/MenuItem';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Paper from 'material-ui/Paper';
+
+const styles = {
+  customWidth: {
+    height: '10px',
+  },
+};
+
 
 class App extends React.Component {
   constructor(props) {
@@ -103,39 +114,94 @@ class App extends React.Component {
   }
 //render header/title of site, search, and city views
   render() {
+    console.log(window.innerHeight);
     return (
-      <div className="app">
-        <header className="navbar is-link is-fixed-top">
-          <h1 className="has-text-weight-bold has-text-white is-size-1 is-lowercase">
-            City Finder
-          </h1>
-        </header>
-        <div className="main columns">
-          <div className="comparison">
-            <CityComparisonContainer/>
-          </div>
-          <div>
-            <CitySelectionContainer
-                cities={this.state.cities}
-                favorites={this.state.favorites}
-                setInfo={this.setInfo}
-                showFavorites={this.state.showFavorites} />
-          </div>
-          <div className="column is-one-quarter">
-            <Filter
-              getCities={this.getCities}
-              getFaves={this.getFaves}
-              showFavorites={this.state.showFavorites}
-              toggleFav={this.toggleFav}
-              setInfo={this.setInfo}
-            />
-          </div>
-          <div className="column is-three-quarters">
-            {this.state.cities.length && <UsDataOverview cities={this.state.cities}/>}
-          </div>
+        <MuiThemeProvider>
+          <div className="app">
+            <header className="navbar">
+              <span className="title">
+                City Finder
+              </span>
+              <span className="filter">
+                Cost of Living:
+                <DropDownMenu value={1} style={styles}>
+                  <MenuItem value={1} primaryText="None" />
+                  <MenuItem value={2} primaryText="Low" />
+                  <MenuItem value={3} primaryText="Medium" />
+                  <MenuItem value={4} primaryText="High" />
+                </DropDownMenu>
+              </span>
 
-        </div>
-      </div>
+              <span className="filter">
+                Weather:
+                <DropDownMenu value={1}>
+                  <MenuItem value={1} primaryText="None" />
+                  <MenuItem value={2} primaryText="Cold" />
+                  <MenuItem value={3} primaryText="Mild" />
+                  <MenuItem value={4} primaryText="Hot" />
+                </DropDownMenu>
+              </span>
+
+              <span className="filter">
+                Region:
+                <DropDownMenu value={1}>
+                  <MenuItem value={1} primaryText="None" />
+                  <MenuItem value={2} primaryText="NorthEast" />
+                  <MenuItem value={3} primaryText="MidWest" />
+                  <MenuItem value={4} primaryText="SouthWest" />
+                  <MenuItem value={5} primaryText="Rockies" />
+                  <MenuItem value={6} primaryText="Pacific" />
+                </DropDownMenu>
+              </span>
+
+              <span className="filter">
+                Environment:
+                <DropDownMenu value={1}>
+                  <MenuItem value={1} primaryText="None" />
+                  <MenuItem value={2} primaryText="Near the Ocean" />
+                  <MenuItem value={3} primaryText="In the Mountains" />
+                  <MenuItem value={4} primaryText="Near Major Lake" />
+                </DropDownMenu>
+              </span>
+
+              <span className="filter">
+                Metro Size:
+                <DropDownMenu value={1}>
+                  <MenuItem value={1} primaryText="None" />
+                  <MenuItem value={2} primaryText="Small" />
+                  <MenuItem value={3} primaryText="Mid-size" />
+                  <MenuItem value={4} primaryText="Big" />
+                </DropDownMenu>
+              </span>
+            </header>
+            <div className="main columns">
+              <div>
+                <CitySelectionContainer
+                    cities={this.state.cities}
+                    favorites={this.state.favorites}
+                    setInfo={this.setInfo}
+                    showFavorites={this.state.showFavorites} />
+              </div>
+              {/* <div >
+                <Filter
+                  getCities={this.getCities}
+                  getFaves={this.getFaves}
+                  showFavorites={this.state.showFavorites}
+                  toggleFav={this.toggleFav}
+                  setInfo={this.setInfo}
+                />
+              </div> */}
+              <div className="comparison">
+                <CityComparisonContainer/>
+              </div>
+              {/* <div className="column is-three-quarters">
+                {this.state.cities.length && <UsDataOverview cities={this.state.cities}/>}
+              </div> */}
+
+            </div>
+
+          </div>
+        </MuiThemeProvider>
     );
   }
 }
