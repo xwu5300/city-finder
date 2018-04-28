@@ -20,6 +20,7 @@ function collect(connect, monitor) {
 class CityCard extends React.Component {
   constructor(props) {
     super(props);
+
     this.stylePopulation = this.stylePopulation.bind(this);
   }
 
@@ -29,8 +30,7 @@ class CityCard extends React.Component {
       .split("")
       .reverse();
     for (var i = 3; i < reversed.length; i += 3) {
-      reversed.splice(i, 0, ",");
-      i++;
+      reversed.splice(i++, 0, ",");
     }
     return reversed.reverse().join("");
   }
@@ -60,16 +60,6 @@ class CityCard extends React.Component {
             <h2 className="has-text-black has-text-weight-bold">
               {city.city_name_short}, {city.state}
             </h2>
-            <div className="has-text-black has-text-weight-semibold">
-              Population: {popString}
-            </div>
-            <div className="has-text-black has-text-weight-semibold">
-              Average rent: ${city.rent_cost}
-            </div>
-            <div className="has-text-black has-text-weight-semibold">
-              Average high temp: {city.avg_high_temp}
-              {"\xB0"}
-            </div>
           </div>
           <div className="info">
             <h2 className="has-text-black has-text-weight-bold">
@@ -77,11 +67,11 @@ class CityCard extends React.Component {
             </h2>
           </div>
         </div>
+        {/* <br></br>
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
+        <br></br> */}
       </div>
     );
   }

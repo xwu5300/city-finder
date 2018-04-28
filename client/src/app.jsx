@@ -111,6 +111,16 @@ class App extends React.Component {
           </h1>
         </header>
         <div className="main columns">
+          <div className="comparison">
+            <CityComparisonContainer />
+          </div>
+          <div>
+            <CitySelectionContainer
+                cities={this.state.cities}
+                favorites={this.state.favorites}
+                setInfo={this.setInfo}
+                showFavorites={this.state.showFavorites} />
+          </div>
           <div className="column is-one-quarter">
             <Filter
               getCities={this.getCities}
@@ -121,16 +131,9 @@ class App extends React.Component {
             />
           </div>
           <div className="column is-three-quarters">
-            <CitySelectionContainer
-              cities={this.state.cities}
-              favorites={this.state.favorites}
-              setInfo={this.setInfo}
-              showFavorites={this.state.showFavorites}
-            />
+
           </div>
-          <div>
-            <CityComparisonContainer/>
-          </div>
+
         </div>
       </div>
     );
