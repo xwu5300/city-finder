@@ -67,8 +67,7 @@ class App extends React.Component {
         this.setState(
           {
             cities: results.data
-          },
-          CB
+          }
         );
       })
       .catch(error => {
@@ -132,7 +131,7 @@ class App extends React.Component {
             />
           </div>
           <div className="column is-three-quarters">
-            <UsDataOverview cities={this.state.cities}/>
+            {this.state.cities.length && <UsDataOverview cities={this.state.cities}/>}
           </div>
 
         </div>
