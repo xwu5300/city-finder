@@ -17,15 +17,12 @@ class CityComparisonDataViz extends React.Component {
     const {left, right} = this.props; //left and right are the left and right city objects
     console.log('cities as props', this.props.cities);
 
-    const CompareRent = left !== '' && right !== '' ? (<div><CompareHistCOL cities={[left, right]}/><CompareRentBar cities={[left, right]}/><CompareCrimeBar cities={[left, right]}/></div>) : (<p>'Nothing to see here'</p>);
+    const CompareRent = (left !== '' && right !== '') ? (<CompareRentBar cities={[left, right]}/>) : '';
     return (
     <div style={{
       display: 'block'
     }}>
         {CompareRent}
-
-        {left ? (`${left.city_name_short}'s average rent is ${left.rent_cost} compared to `) : ''}
-        {right ? (`${right.city_name_short}'s ${right.rent_cost}`) : ''}
     </div>
     )
   }

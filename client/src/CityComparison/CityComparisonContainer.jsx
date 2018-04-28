@@ -23,21 +23,23 @@ class CityComparisonContainer extends React.Component {
   render() {
     const {left, right} = this.state.selectedCities;
     return (
-    <div>
-      <div>
+    <div className="city-comparison-container">
+      <div className="city-drop-zones">
+        <div>
         <CityDropZone
           city={this.state.selectedCities.left}
           handleDrop={this.handleDrop}
           position="left" key="left"
         />
+        </div>
+        <div>
         <CityDropZone
           city={this.state.selectedCities.right}
           handleDrop={this.handleDrop}
           position="right" key="right"
         />
+        </div>
       </div>
-      <br></br>
-      <br></br>
       <div>
         <CityComparisonDataViz left={left} right={right}/>
       </div>
