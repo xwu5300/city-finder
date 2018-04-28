@@ -28,7 +28,18 @@ db.once('open', function() {
 const citySchema = mongoose.Schema({
   id: Number,
   city_name_short: String,
-  city_name_long: String,
+  city_name_long: {
+    type: String,
+    unique: true
+  },
+  city_name_unAbrev: String,
+  cost_of_living_rank: Array,
+  cost_of_living_index: Array,
+  // cost_of_rent_rank: Object,
+  // cost_of_rent_index: Object,
+  // cost_of_other_rank: Object,
+  // cost_of_other_index: Object,
+  violent_crime_data: Object,
   state: String,
   region: String,
   avg_high_temp: Number,
@@ -109,7 +120,36 @@ let getFavesFromDB = (callback) => {
   })
 }
 
+const getYahooId = (city_name_short) => {
+  // console.log('looking up yahoo id for', city_name_short)
+  // console.log('city name is', city_name_short);
+  return City.find({'city_name_short': city_name_short}).exec()
+    .then(doc => {
+      return doc[0].yahoo_weather_id;
+    })
+    .catch(err => console.log(err))
+}
+const saveCityData = (cityData) => {
+
+  cityData.forEach((city) => {
+    let conditions = {city_name_long: city.city_name_long};
+    let options = { multi: true };
+    
+    
+    City.update(conditions, city, options, (err, data) => {
+      if (err) console.log('error updating', err);
+      console.log('saved ', data);
+    });
+  })
+}
+
+
+
+
+
 exports.queryDB = queryDB;
 exports.getFavesFromDB = getFavesFromDB;
 exports.addToDB = addToDB;
 exports.deleteFromDB = deleteFromDB;
+exports.getYahooId = getYahooId;
+exports.saveCityData = saveCityData;

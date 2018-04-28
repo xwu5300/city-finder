@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const { fetchWeather, makeQueryString } = require(path.join(__dirname + '/../database/helpers.js'));
+const { makeQueryString } = require(path.join(__dirname + '/../database/helpers.js'));
+const CronJob = require('cron').CronJob;
 const DB = require(path.join(__dirname + '/../database/database.js'));
+const { getTweetTrends } = require('./wordcloud.js');
 
 const app = express();
 
@@ -11,13 +13,14 @@ app.use(bodyParser.json());
 
 app.get('/faves', (req, res) => {
   DB.getFavesFromDB((err, data) => {
-    if (err) {console.log('ERROR IN GETTING FAVORITES FROM DB: ', err)}
-    else {res.status(200).send(data)}
+    if (err) {return console.log('ERROR IN GETTING FAVORITES FROM DB: ', err)}
+    res.status(200).send(data)
   })
 })
 
 app.post('/addFaves', (req, res) => {
   DB.addToDB(req.body)
+  res.send('ok');
 })
 
 app.post('/deleteFaves', (req, res) => {
@@ -31,24 +34,33 @@ app.get('/cities', (req, res) => {
   let temp = (req.query !== '{}') ? req.query[0] : {};
   let queryString = makeQueryString(temp)
   DB.queryDB(queryString, (err, docs) => {
-    if (err) {console.log('ERROR IN GETTING RESULTS FROM DB: ', err)}
-    else {
+    if (err) {return console.log('ERROR IN GETTING RESULTS FROM DB: ', err)}
       res.status(200).send(docs); //returns cities that match queryString to getCities in index.jsx
-    }
   })    
 });
 
-app.get('/weather', (req, res) => {
-  var stringOfCityIDs = req.query.cityIDs.join(','); //gets all city IDs for API call
+// app.get('/weather', (req, res) => {
+//   var stringOfCityIDs = req.query.cityIDs.join(','); //gets all city IDs for API call
 
-  fetchWeather(stringOfCityIDs, (err, data) => { //calls fetchWeather in helpers.js
-    if (err) {
-      console.log('ERROR FETCHING WEATHER: ',err);
-      res.status(500).send('Server error! Unable to fetch weather.')
-    } else {
-      res.status(200).send(data); //sends data back to getWeather in index.jsx
-    }
-  })
+//   fetchWeather(stringOfCityIDs, (err, data) => { //calls fetchWeather in helpers.js
+//     if (err) {
+//       console.log('ERROR FETCHING WEATHER: ',err);
+//       res.status(500).send('Server error! Unable to fetch weather.')
+//     } else {
+//       res.status(200).send(data); //sends data back to getWeather in index.jsx
+//     }
+//   })
+// });
+
+app.get('/twitter', (req, res) => {
+  // console.log('inside express, hitting twitter endpoint for', req.query.cityName)
+  DB.getYahooId(req.query.cityName)
+      .then(yahooId => {
+        // console.log('yahooId is', yahooId)
+        return getTweetTrends(yahooId)
+      })
+      .then(trends => res.send(trends))
+      .catch(err => console.log(err));
 });
 
 app.listen(process.env.PORT || 3000, () => {

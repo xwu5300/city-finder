@@ -1,85 +1,197 @@
-.cityPanel .container {
+body {
+  margin: 0px;
+}
+
+/* ====================================
+    Header Styling
+   ==================================== */ 
+.navbar {
+  position: fixed;
+  z-index:5;
+  width: 100%;
+  background-color: #A9A9A9;
+}
+
+.title {
+  font-family: Helvetica;
+  font-size: 40px;
+  color: gray;
+  margin: 4px;
+  margin-left: 10px;
+
+}
+
+/* ====================================
+    City Comparison Styling
+   ==================================== */ 
+.comparison {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: 'inline';
+  background-color: #A9A9A9;;
+}
+/* 
+.city-drop-zones {
   position: relative;
-  height: 100%;
+  height: 60px;
+  background-color:  #A9A9A9;
+} */
+
+.city-data-viz{
+  background-color: #A9A9A9;
+}
+
+span.compare-city {
+  font-family: Helvetica;
+}
+
+span.drop-city {
+  font-family: Helvetica;
+  font-size: 40px;
+  color: gray;
+  margin: 4px;
+  margin-left: 10px;
+}
+
+div.drop-city {
+  text-align: center;
+}
+
+
+/* ====================================
+    City Card Styling
+   ==================================== */ 
+
+.has-text-black.has-text-weight-bold {
+  font-family: Helvetica;
+  color: beige;
+}
+
+/* ====================================
+Background Color
+   ==================================== */ 
+body {
+    background-color: #18121E;
 }
 
 /* ====================================
 Creates grid format to hold cities 
    ==================================== */ 
-.cities {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-row-gap: 20px;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 8px;
+
+.main.columns{
+  display: inline-grid ! important;
+  height: 82vh;
 }
+.cities {
+  position: relative;
+  display: grid;
+  top: 4rem;
+  grid-template-rows: 1fr 1fr 1fr;
+  /* grid-template-columns: 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw; */
+  grid-template-columns: repeat(13, minmax(50vw, 60vw));
+  object-fit: cover;
+  grid-gap: .4rem;
+  padding-bottom: 8vh;
+}
+/* .cityPanel {
+  height: 30%;
+} */
 
 /* ====================================
   Sets the overlay the displays city info 
    ==================================== */ 
-.container .overlay {
+/* .container .overlay {
   position: absolute;
-  height: 100%;
-  width: 26.1%;
+  height: 200px;
+  width: 300px;
   opacity: 0;
   transition: .2s ease;
   background-color: rgb(228, 234, 236);
+} */
+
+.city-name {
+  font-family: Helvetica;
+  font-size: 1.5em;
 }
 
 /* ====================================
 Reveals the info held in the overlay on hover
    ==================================== */ 
-.container .overlay:hover {
+/* .container .overlay:hover{
   opacity: .82;
+  height: 140px;
+  width: 240px;
   display: inline;
   padding: 30px;
-}
-
-.container .info {
-  padding: 7px;
-}
-
+} */
+/* 
 .container .overlay:hover + .info {
-  display: none
+  display: none;
+} */
+div.info {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: white;
 }
 
+span.city-name {
+  background-color: #18121E;
+  padding: 5px;
+}
+
+.city-data-viz {
+  float: left;
+  display: inline-block;
+}
 /* ====================================
 Keeps filter buttons fixed. Will not move on scroll of page
    ==================================== */ 
-.is-one-quarter {
+/* .is-one-quarter {
   position: fixed;  
   padding-top: 0px;
-}
+  visibility: hidden;
+} */
 
 /* ====================================
 Sets the margin of the cities so they do not go behind the filter buttons
    ==================================== */
-.is-three-quarters {
-  margin-left: 25%;
+
+.filter {
+  position: relative;
+  font-family: Helvetica;
+  font-size: 15px;
+  /* margin: 10px; */
+  float: right;
+  top: 0;
+  /* visibility: hidden; */
+
+
 }
 
-.buttonRow {
+/* .buttonRow {
   width: 100%;
   margin: 8px 0 8px 8px;
-}
+} */
 
-.width-one-third {
+/* .width-one-third {
   width: 33%;
-}
+} */
 
-.one-hundred-percent {
+/* .one-hundred-percent {
   width: 100%;
-}
+} */
 
-header{
+/* header{
   text-align: center;
-}
+} */
 
-h1 {
+/* h1 {
   padding-left: 10px;
-}
+} */
 
-.filter {  
+/* .filter {  
   border-radius: 12px;
   border: 2px solid dodgerblue;
   padding: 6px;
@@ -87,12 +199,12 @@ h1 {
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
-}
+} */
 
-.main {
+/* .main {
   margin-top: 80px;
-}
+} */
 
-.container .overlay:active{
+/* .container .overlay:active{
   border: 3px red solid;  
-}
+} */
