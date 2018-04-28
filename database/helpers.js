@@ -1,5 +1,5 @@
 const axios = require('axios');
-const YQL = require('YQL');
+const YQL = require('yql');
 
 let makeQueryString = (props) => {
   // called every time there is a change in state (aka a filter is selected/deselected)
