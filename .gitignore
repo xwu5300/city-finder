@@ -1,5 +1,5 @@
 config.js
-client/dist/bundle.js
+.DS_Store
 client/.DS_Store
 node_modules
 package-lock.json
