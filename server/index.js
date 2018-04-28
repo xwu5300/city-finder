@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 app.get('/faves', (req, res) => {
   DB.getFavesFromDB((err, data) => {
-    if (err) {console.log('ERROR IN GETTING FAVORITES FROM DB: ', err)}
-    else {res.status(200).send(data)}
+    if (err) {return console.log('ERROR IN GETTING FAVORITES FROM DB: ', err)}
+    res.status(200).send(data)
   })
 })
 
@@ -33,10 +33,8 @@ app.get('/cities', (req, res) => {
   let temp = (req.query !== '{}') ? req.query[0] : {};
   let queryString = makeQueryString(temp)
   DB.queryDB(queryString, (err, docs) => {
-    if (err) {console.log('ERROR IN GETTING RESULTS FROM DB: ', err)}
-    else {
+    if (err) {return console.log('ERROR IN GETTING RESULTS FROM DB: ', err)}
       res.status(200).send(docs); //returns cities that match queryString to getCities in index.jsx
-    }
   })    
 });
 
