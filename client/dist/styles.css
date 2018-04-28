@@ -12,22 +12,51 @@ body {
   background-color: #A9A9A9;
 }
 
+.title {
+  font-family: Helvetica;
+  font-size: 40px;
+  color: gray;
+  margin: 4px;
+  margin-left: 10px;
+
+}
+
 /* ====================================
     City Comparison Styling
    ==================================== */ 
 .comparison {
   position: fixed;
-  z-index: 5;
-  top: 80px;
+  bottom: 0;
   width: 100%;
-  background-color: #EFEFEF;
+  background-color: #A9A9A9;;
 }
-
+/* 
 .city-drop-zones {
   position: relative;
-  /* left: 50%;
-  transform: translate(-25%, 0%); */
+  height: 60px;
+  background-color:  #A9A9A9;
+} */
+
+.city-data-viz{
+  background-color: #A9A9A9;
 }
+
+span.compare-city {
+  font-family: Helvetica;
+}
+
+span.drop-city {
+  font-family: Helvetica;
+  font-size: 40px;
+  color: gray;
+  margin: 4px;
+  margin-left: 10px;
+}
+
+div.drop-city {
+  text-align: center;
+}
+
 
 /* ====================================
     City Card Styling
@@ -41,8 +70,8 @@ body {
 /* ====================================
 Background Color
    ==================================== */ 
-body.has-navbar-fixed-top {
-    background-color: #EFEFEF;
+body {
+    background-color: #18121E;
 }
 
 /* ====================================
@@ -54,31 +83,33 @@ Creates grid format to hold cities
 }
 .cities {
   position: relative;
-  /* z-index: 5; */
-  top: 350px;
-  /* left: 25%; */
-  /* transform: translate(-50%, 0%); */
   display: grid;
-  /* grid-auto-columns: auto; */
-  grid-template-rows: 1fr 1fr 1fr;
-  /* grid-row-gap: 10px; */
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  max-height: 20vh;
-  min-height: 0vh;
-  margin-top: 8px;
+  top: 53px;
+  grid-template-columns: 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw;
+  /* grid-template-rows: 100vh; */
+  grid-gap: 5px;
+  margin-bottom: 80px;
 }
+/* .cityPanel {
+  height: 30%;
+} */
 
 /* ====================================
   Sets the overlay the displays city info 
    ==================================== */ 
-/* .container .overlay {
+.container .overlay {
   position: absolute;
   height: 200px;
   width: 300px;
   opacity: 0;
   transition: .2s ease;
   background-color: rgb(228, 234, 236);
-} */
+}
+
+.city-name {
+  font-family: Helvetica;
+  font-size: 1.5em;
+}
 
 /* ====================================
 Reveals the info held in the overlay on hover
@@ -90,15 +121,25 @@ Reveals the info held in the overlay on hover
   display: inline;
   padding: 30px;
 } */
-
-.container .info {
-  padding: 7px;
-}
 /* 
 .container .overlay:hover + .info {
   display: none;
 } */
+div.info {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: white;
+}
 
+span.city-name {
+  background-color: #18121E;
+  padding: 5px;
+}
+
+.city-data-viz {
+  float:left;
+}
 /* ====================================
 Keeps filter buttons fixed. Will not move on scroll of page
    ==================================== */ 
@@ -111,6 +152,18 @@ Keeps filter buttons fixed. Will not move on scroll of page
 /* ====================================
 Sets the margin of the cities so they do not go behind the filter buttons
    ==================================== */
+
+.filter {
+  position: relative;
+  font-family: Helvetica;
+  font-size: 15px;
+  /* margin: 10px; */
+  float: right;
+  top: 0;
+  /* visibility: hidden; */
+
+
+}
 
 /* .buttonRow {
   width: 100%;
@@ -133,7 +186,7 @@ Sets the margin of the cities so they do not go behind the filter buttons
   padding-left: 10px;
 } */
 
-.filter {  
+/* .filter {  
   border-radius: 12px;
   border: 2px solid dodgerblue;
   padding: 6px;
@@ -141,7 +194,7 @@ Sets the margin of the cities so they do not go behind the filter buttons
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
-}
+} */
 
 /* .main {
   margin-top: 80px;
