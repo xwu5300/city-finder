@@ -80,15 +80,19 @@ Creates grid format to hold cities
 
 .main.columns{
   display: inline-grid ! important;
+  height: 100vh;
 }
 .cities {
   position: relative;
   display: grid;
   top: 53px;
-  grid-template-columns: 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw;
-  /* grid-template-rows: 100vh; */
+  grid-template-rows: 1fr 1fr 1fr;
+  /* grid-template-columns: 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw; */
+  grid-template-columns: repeat(13, minmax(30vw, 40vw));
+  object-fit: cover;
   grid-gap: 5px;
   margin-bottom: 80px;
+  height: 100vh;
 }
 /* .cityPanel {
   height: 30%;
