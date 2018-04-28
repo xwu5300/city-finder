@@ -42,7 +42,6 @@ class UsDataOverview extends React.Component {
     .force('forceY', d3.forceY().strength(.1).y(500))
     .force('charge', d3.forceManyBody().strength(-100));
 
-    console.log('nodes', nodes)
 
 
     simulation.nodes(nodes)
