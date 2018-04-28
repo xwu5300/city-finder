@@ -26,6 +26,7 @@ class CityCard extends React.Component {
   }
 
   handleClick(e) {
+    console.log('onclick', e.target.name);
     this.props.showDetails(e.target.name);
   }
 
@@ -69,7 +70,9 @@ class CityCard extends React.Component {
         </div>
         <div className="info">
           <span className="city-name">{city.city_name_short}, {city.state}
-          <button name={city.city_name_short} onClick={this.handleClick}></button>
+          <button name={city.city_name_short} onClick={this.handleClick} style={{ border: 'none', backgroundColor: 'transparent' }}>
+          <img name={city.city_name_short} src={require('../../dist/images/Twitter_Social_Icon_Circle_Color.svg')} alt="My logo" width="16"/>
+          </button>
           </span>
         </div>
 
