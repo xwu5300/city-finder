@@ -15,7 +15,6 @@ function collect(connect, monitor) {
     isOver: monitor.isOver()
   };
 }
-
 class CityDropZone extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +25,7 @@ class CityDropZone extends React.Component {
     return connectDropTarget(
       <div style={{
         border: "solid 1px black",
-        height: 'auto',
+        height: '4vh',
         width: "49%",
         display: 'inline-block',
         float: 'right',

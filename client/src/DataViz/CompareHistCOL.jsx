@@ -107,6 +107,8 @@ class CompareHistCOL extends Component {
   render() {
     let cities = this.props.cities;
 
+    console.log(cities);
+
     let compareFn = (a, b) => {
       return parseInt(a.year) - parseInt(b.year); 
     };
