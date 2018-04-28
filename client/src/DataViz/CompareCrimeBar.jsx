@@ -1,7 +1,64 @@
+
+// cost_of_living_index
+// :
+// Array(5)
+// 0
+// :
+// {index: 97.8, year: "2015"}
+// 1
+// :
+// {index: 97.8, year: "2013"}
+// 2
+// :
+// {index: 98.4, year: "2011"}
+// 3
+// :
+// {index: 98, year: "2012"}
+// 4
+// :
+// {index: 97.7, year: "2014"}
+// length
+// :
+// 5
+// __proto__
+// :
+// Array(0)
+// cost_of_living_rank
+// :
+// Array(5)
+// 0
+// :
+// {rank: 86, year: "2012"}
+// 1
+// :
+// {rank: 93, year: "2014"}
+// 2
+// :
+// {rank: 91, year: "2013"}
+// 3
+// :
+// {rank: 90, year: "2015"}
+// 4
+// :
+// {rank: 82, year: "2011"}
+// length
+
+// violent_crime_data
+// :
+// crime_count
+// :
+// 2340
+// crime_rate
+// :
+// 0.009011264080100126
+// year
+// :
+// "2014"
+
 import React, { Component } from 'react';
 import { VictoryChart, VictoryBar, VictoryStack, VictoryTheme, VictoryAxis, VictoryTooltip, VictoryVoronoiContainer, VictoryLabel } from 'victory'
 
-class CompareRentBar extends Component {
+class CompareCrimeBar extends Component {
 
   //    data format
   //     cities: [
@@ -63,7 +120,7 @@ class CompareRentBar extends Component {
                 />}
               >
               <VictoryLabel 
-                text={`Rent Comparison: ${cities[0].city_name_short} vs. ${cities[1].city_name_short}`} 
+                text={`Crime Level Comparison: ${cities[0].city_name_short} vs. ${cities[1].city_name_short}`} 
                 verticalAnchor={"end"}
                 x={120}
                 y={30}
@@ -77,10 +134,10 @@ class CompareRentBar extends Component {
                 axisLabelComponent={<VictoryLabel dy={-24} />}
                 dependentAxis
                 tickFormat={(y) => {
-                  return `$${y}`;
+                  return `${y}`;
                 }}
                 fixLabelOverlap={true}
-                label={"Median Rent"}
+                label={"Violent Crimes per 1000 Residents"}
                 style={{
                   tickLabels: {
                     fontSize: 10,
@@ -104,12 +161,12 @@ class CompareRentBar extends Component {
                 data={cities.map((city) => { 
                   return { 
                     city: city.city_name_short, 
-                    rent: typeof city.rent_cost === 'string' ? Math.floor(city.rent_cost.replace(/[,\s]/,"")) : city.rent_cost, 
-                    label: `Rent: $${city.rent_cost}`
+                    crimes: city.violent_crime_data.crime_rate * 1000, 
+                    label: `Violent Crimes/1000 Residents: ${city.violent_crime_data.crime_rate * 1000}`
                   } 
                 })}
                 x={"city"}
-                y={"rent"}
+                y={"crimes"}
                 animate={{
                   onExit: {
                     duration: 100,
@@ -134,7 +191,7 @@ class CompareRentBar extends Component {
   }
 }
 
-export default CompareRentBar;
+export default CompareCrimeBar;
 
 
 //${typeof city.rent_cost === 'string' ? `$${city.rent_cost.slice(0, city.rent_cost.length-3)}` : `$${Math.floor(city.rent_cost)}
