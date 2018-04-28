@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const { fetchWeather, makeQueryString } = require(path.join(__dirname + '/../database/helpers.js'));
+const { makeQueryString } = require(path.join(__dirname + '/../database/helpers.js'));
 const CronJob = require('cron').CronJob;
 const DB = require(path.join(__dirname + '/../database/database.js'));
 const { getTweetTrends } = require('./wordcloud.js');
@@ -39,18 +39,18 @@ app.get('/cities', (req, res) => {
   })    
 });
 
-app.get('/weather', (req, res) => {
-  var stringOfCityIDs = req.query.cityIDs.join(','); //gets all city IDs for API call
+// app.get('/weather', (req, res) => {
+//   var stringOfCityIDs = req.query.cityIDs.join(','); //gets all city IDs for API call
 
-  fetchWeather(stringOfCityIDs, (err, data) => { //calls fetchWeather in helpers.js
-    if (err) {
-      console.log('ERROR FETCHING WEATHER: ',err);
-      res.status(500).send('Server error! Unable to fetch weather.')
-    } else {
-      res.status(200).send(data); //sends data back to getWeather in index.jsx
-    }
-  })
-});
+//   fetchWeather(stringOfCityIDs, (err, data) => { //calls fetchWeather in helpers.js
+//     if (err) {
+//       console.log('ERROR FETCHING WEATHER: ',err);
+//       res.status(500).send('Server error! Unable to fetch weather.')
+//     } else {
+//       res.status(200).send(data); //sends data back to getWeather in index.jsx
+//     }
+//   })
+// });
 
 app.get('/twitter', (req, res) => {
   // console.log('inside express, hitting twitter endpoint for', req.query.cityName)

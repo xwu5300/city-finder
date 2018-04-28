@@ -31,7 +31,7 @@ let makeQueryString = (props) => {
 }
 
 // Returns weatherData for the cities. Currently, the result of this function is logged to the console on the client side
-// fetchWeather = function(cityIDs, callback) {
+// const fetchWeather = function(cityIDs, callback) {
 //   // API DOCUMENTATION LINKS FOR fetchWeather:
 //   // https://gist.github.com/ydn/6ef5a695e871b8a628d0#file-weather-js
 //   // https://developer.yahoo.com/weather/
