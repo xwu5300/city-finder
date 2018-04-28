@@ -120,7 +120,6 @@ let getFavesFromDB = (callback) => {
   })
 }
 
-<<<<<<< HEAD
 const getYahooId = (city_name_short) => {
   // console.log('city name is', city_name_short);
   return City.find({'city_name_short': city_name_short}).exec()
@@ -129,7 +128,6 @@ const getYahooId = (city_name_short) => {
     })
     .catch(err => console.log(err))
 }
-=======
 const saveCityData = (cityData) => {
 
   cityData.forEach((city) => {
@@ -147,14 +145,10 @@ const saveCityData = (cityData) => {
 
 
 
->>>>>>> data viz views complete
 
 exports.queryDB = queryDB;
 exports.getFavesFromDB = getFavesFromDB;
 exports.addToDB = addToDB;
 exports.deleteFromDB = deleteFromDB;
-<<<<<<< HEAD
 exports.getYahooId = getYahooId;
-=======
 exports.saveCityData = saveCityData;
->>>>>>> data viz views complete
