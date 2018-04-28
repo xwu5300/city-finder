@@ -99,12 +99,16 @@ class CitySelectionContainer extends React.Component {
       display = this.props.favorites;
     }
 
+    let twitterWC = (this.state.frequency_list.length ? <TwitterWordCloud
+    words={this.state.frequency_list}
+    /> : null);
+
     if (display.length > 0) {
       return (
         <div>
-          {this.state.frequency_list.length ? <TwitterWordCloud
+          {/* {this.state.frequency_list.length ? <TwitterWordCloud
                                       words={this.state.frequency_list}
-                                      /> : null}
+                                      /> : null} */}
         <div className="cities">
           {display.map(city => {
             var popString = this.stylePopulation(city.population);
@@ -114,6 +118,7 @@ class CitySelectionContainer extends React.Component {
                 city={city}
                 handleClick={this.deleteOrSave}
                 showDetails={this.showCityDetails}
+                twitterWC={twitterWC}
               />
             </div>
             );
