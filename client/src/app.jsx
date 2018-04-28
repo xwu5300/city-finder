@@ -30,9 +30,16 @@ class App extends React.Component {
       cities: [],
       favorites: [],
       showFavorites: false,
+      filterCategories: {
+        CostOfLiving: 1,
+        Weather: 1,
+        Region: 1,
+        Environment: 1,
+        MetroSize: 1,
+      },
       selectedCities: {
         left: '',
-        right: ''
+        right: '',
       }
     };
     this.getCities = this.getCities.bind(this);
@@ -65,6 +72,10 @@ class App extends React.Component {
     this.setState({
       [state]: data
     });
+  }
+
+  handleChange(event, index, value) {
+    console.log(event.target);
   }
 
   // getCities will return the cities that match the query string
@@ -124,7 +135,7 @@ class App extends React.Component {
               </span>
               <span className="filter">
                 Cost of Living:
-                <DropDownMenu value={1} style={styles}>
+                <DropDownMenu value={this.state.filterCategories.CostOfLiving} style={styles} onChange={this.handleChange}>
                   <MenuItem value={1} primaryText="None" />
                   <MenuItem value={2} primaryText="Low" />
                   <MenuItem value={3} primaryText="Medium" />
@@ -134,7 +145,7 @@ class App extends React.Component {
 
               <span className="filter">
                 Weather:
-                <DropDownMenu value={1}>
+                <DropDownMenu value={this.state.filterCategories.Weather}>
                   <MenuItem value={1} primaryText="None" />
                   <MenuItem value={2} primaryText="Cold" />
                   <MenuItem value={3} primaryText="Mild" />
@@ -144,7 +155,7 @@ class App extends React.Component {
 
               <span className="filter">
                 Region:
-                <DropDownMenu value={1}>
+                <DropDownMenu value={this.state.filterCategories.Region}>
                   <MenuItem value={1} primaryText="None" />
                   <MenuItem value={2} primaryText="NorthEast" />
                   <MenuItem value={3} primaryText="MidWest" />
@@ -156,7 +167,7 @@ class App extends React.Component {
 
               <span className="filter">
                 Environment:
-                <DropDownMenu value={1}>
+                <DropDownMenu value={this.state.filterCategories.Environment}>
                   <MenuItem value={1} primaryText="None" />
                   <MenuItem value={2} primaryText="Near the Ocean" />
                   <MenuItem value={3} primaryText="In the Mountains" />
@@ -166,7 +177,7 @@ class App extends React.Component {
 
               <span className="filter">
                 Metro Size:
-                <DropDownMenu value={1}>
+                <DropDownMenu value={this.state.filterCategories.MetroSize}>
                   <MenuItem value={1} primaryText="None" />
                   <MenuItem value={2} primaryText="Small" />
                   <MenuItem value={3} primaryText="Mid-size" />
