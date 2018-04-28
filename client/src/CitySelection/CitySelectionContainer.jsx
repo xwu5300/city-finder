@@ -76,7 +76,7 @@ class CitySelectionContainer extends React.Component {
     const params = {
       cityName: cityName //matches city_name_short from city props
     }
-    console.log('making a get to /twitter for', params.cityName)
+    // console.log('making a get to /twitter for', params.cityName)
     axios.get('/twitter', {params: params})
       .then(resp => {
         const frequency_list = resp.data.map(word => {

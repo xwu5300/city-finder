@@ -55,7 +55,7 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/twitter', (req, res) => {
-  console.log('inside express, hitting twitter endpoint for', req.query.cityName)
+  // console.log('inside express, hitting twitter endpoint for', req.query.cityName)
   DB.getYahooId(req.query.cityName)
       .then(yahooId => {
         // console.log('yahooId is', yahooId)

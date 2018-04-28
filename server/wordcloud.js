@@ -9,9 +9,30 @@ const client = new Twitter({
   access_token_secret: access_token_secret
 });
 
-const getTweetTrends = (yahooId) => { //trends seem to similar across cities...maybe x-ref against worldwide?
+//get US trending tweets and store in closure variable so it can be called once per user session
+let USTrendingTweets = [];
+client.get('trends/place.json?', {id: 23424977})
+  .then(resp => {
+    // console.log('response from twitter is', resp);
+    // console.log('inside server, searching twitter for', resp[0].locations[0].name);
+    const trendsAndVolume = resp[0].trends.reduce((trends, tweet) => {
+      trends.push({
+        text: tweet.name,
+        size: adjustTweetVolume(tweet.tweet_volume) //default size when size is null
+      });
+      return trends;
+    }, []);
+    USTrendingTweets = trendsAndVolume;
+    return
+  })
+  .catch(err => {
+    console.log('err from twitter call is', err);
+  });
+
+
+const getTweetTrends = (yahooId) => {
+  // console.log('us trending tweets are', USTrendingTweets);
   const params = {id: yahooId};
-  console.log('about to try to make request to twitter');
   return client.get('trends/place.json?', params)
     .then(resp => {
       // console.log('response from twitter is', resp);
@@ -23,7 +44,9 @@ const getTweetTrends = (yahooId) => { //trends seem to similar across cities...m
         });
         return trends;
       }, []);
-      return trendsAndVolume;
+      // console.log('local trends are', trendsAndVolume);
+      // console.log('adjusted trends are', adjustTweetTrends(trendsAndVolume))
+      return adjustTweetTrends(trendsAndVolume);
     })
     .catch(err => {
       console.log('err from twitter call is', err);
@@ -35,6 +58,19 @@ const adjustTweetVolume = (tweetVol) => {
   return !tweetVol ? 5 : tweetVol;
 };
 
+const adjustTweetTrends = (trendsAndVolume) => {
+  return trendsAndVolume.map(trend => {
+    let adjustedSize = (USTrendingTweets.filter(usTrend => usTrend.text === trend.text).length) ? (
+      trend.size
+    ) : trend.size * 10000 - 1;
+    if (adjustedSize > 50000) adjustedSize = 50000; //set max size of 50000
+    return {
+      text: trend.text,
+      size: adjustedSize
+    }
+  });
+};
+
 const getCloud = () => {
   return getTweetTrends()
     .then(words => {
@@ -42,20 +78,6 @@ const getCloud = () => {
     })
     .catch(err => console.log(err))
 };
-
-//BUG: same phrase seems to show up separate times
-const countOccurences = (words) => { //filter out meaningless words
-  let occurences = {};
-  words.forEach(word => {
-    if (occurences.hasOwnProperty(word)) {
-      occurences[word]++;
-    } else {
-      occurences[word] = 1;
-    }
-  })
-  console.log('occurences are', occurences);
-  return occurences;
-}
 
 exports.getCloud = getCloud;
 exports.getTweetTrends = getTweetTrends;

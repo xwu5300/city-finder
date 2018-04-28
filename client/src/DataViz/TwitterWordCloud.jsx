@@ -2,7 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import WordCloud from 'react-d3-cloud';
 
-const fontSizeMapper = (word) => Math.log2(word.value) * 5;
+const fontSizeMapper = (word) => {
+  // console.log('font size is', Math.log2(word.value) * 5);
+  if ((Math.log2(word.value) * 5) < 200) {
+    return Math.min(200, (Math.log2(word.value) * 5));
+  } else return 200;
+};
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -33,11 +38,11 @@ class TwitterWordCloud extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return wordsArrsEqual(this.props.words, nextProps.words);
+    return !wordsArrsEqual(this.props.words, nextProps.words);
   }
 
   render() {
-    console.log('state at this render is', this.props.words)
+    // console.log('state at this render is', this.props.words)
     return (
     <div>
       WORD CLOUD

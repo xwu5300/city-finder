@@ -81,7 +81,7 @@ class CityCard extends React.Component {
               {city.city_name_short}, {city.state}
             </h2>
           </div>
-          <button name={city.city_name_short} onClick={this.handleClick}>CLICK ME FOR DEETS</button>
+          <button name={city.city_name_short} onClick={this.handleClick}>See live twitter trends in this city!</button>
         </div>
         <br></br>
         <br></br>
