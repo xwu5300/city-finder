@@ -1,6 +1,10 @@
 var cloud = require("d3-cloud");
 const Twitter = require('twitter');
-const { consumer_key, consumer_secret, access_token_key, access_token_secret } = require('../config.js');
+
+const consumer_key = process.env.consumer_key || require('../config.js').consumer_key;
+const consumer_secret = process.env.consumer_secret || require('../config.js').consumer_secret;
+const access_token_key = process.env.access_token_key || require('../config.js').access_token_key;
+const access_token_secret = process.env.access_token_secret || require('../config.js').access_token_secret;
 
 const client = new Twitter({
   consumer_key: consumer_key,
