@@ -10,6 +10,7 @@ import Filter from "./Filter.jsx";
 import CitySelectionContainer from "./CitySelection/CitySelectionContainer.jsx";
 import {ItemTypes} from "./constants.js";
 import CityComparisonContainer from "./CityComparison/CityComparisonContainer.jsx";
+import UsDataOverview from "./DataViz/UsDataOverview.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -66,8 +67,7 @@ class App extends React.Component {
         this.setState(
           {
             cities: results.data
-          },
-          CB
+          }
         );
       })
       .catch(error => {
@@ -112,7 +112,7 @@ class App extends React.Component {
         </header>
         <div className="main columns">
           <div className="comparison">
-            <CityComparisonContainer />
+            <CityComparisonContainer/>
           </div>
           <div>
             <CitySelectionContainer
@@ -131,7 +131,7 @@ class App extends React.Component {
             />
           </div>
           <div className="column is-three-quarters">
-
+            {this.state.cities.length && <UsDataOverview cities={this.state.cities}/>}
           </div>
 
         </div>
