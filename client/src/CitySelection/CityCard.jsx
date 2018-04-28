@@ -69,7 +69,9 @@ class CityCard extends React.Component {
         </div>
         <div className="info">
           <span className="city-name">{city.city_name_short}, {city.state}
-          <button name={city.city_name_short} onClick={this.handleClick}></button>
+          <button name={city.city_name_short} onClick={this.handleClick} style={{ border: 'none', backgroundColor: 'transparent' }}>
+          <img src={require('../../dist/images/Twitter_Social_Icon_Circle_Color.svg')} alt="My logo" width="16"/>
+          </button>
           </span>
         </div>
 
