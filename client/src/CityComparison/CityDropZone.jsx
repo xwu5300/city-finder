@@ -26,11 +26,13 @@ class CityDropZone extends React.Component {
     return connectDropTarget(
       <div style={{
         border: "dotted 2px black",
-        height: '250px',
-        width: "45%",
+        height: 'auto',
+        width: "48%",
         display: 'inline-block',
         float: 'left',
-        backgroundImage: `url(./images/${city.id}.jpg)`
+        backgroundImage: `url(./images/${city.id}.jpg)`,
+        backgroundPosition: "center",
+        backgroundSize: "cover"
       }}>
         <h1>{city ? city.city_name_short : ''}</h1>
       </div>
