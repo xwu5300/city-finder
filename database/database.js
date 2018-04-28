@@ -121,6 +121,7 @@ let getFavesFromDB = (callback) => {
 }
 
 const getYahooId = (city_name_short) => {
+  // console.log('looking up yahoo id for', city_name_short)
   // console.log('city name is', city_name_short);
   return City.find({'city_name_short': city_name_short}).exec()
     .then(doc => {

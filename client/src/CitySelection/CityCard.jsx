@@ -22,6 +22,11 @@ class CityCard extends React.Component {
     super(props);
 
     this.stylePopulation = this.stylePopulation.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    this.props.showDetails(e.target.name);
   }
 
   stylePopulation(population) {
@@ -66,6 +71,7 @@ class CityCard extends React.Component {
               {city.city_name_short}, {city.state}
             </h2>
           </div>
+          <button name={city.city_name_short} onClick={this.handleClick}>See live twitter trends in this city!</button>
         </div>
         {/* <br></br>
         <br></br>
