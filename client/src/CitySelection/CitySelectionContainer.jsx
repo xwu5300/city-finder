@@ -105,7 +105,7 @@ class CitySelectionContainer extends React.Component {
 
     if (display.length > 0) {
       return (
-        <div>
+        <div style={{height: '100vh'}}>
           {/* {this.state.frequency_list.length ? <TwitterWordCloud
                                       words={this.state.frequency_list}
                                       /> : null} */}

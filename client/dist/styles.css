@@ -28,6 +28,7 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
+  display: 'inline';
   background-color: #A9A9A9;;
 }
 /* 
@@ -80,19 +81,18 @@ Creates grid format to hold cities
 
 .main.columns{
   display: inline-grid ! important;
-  height: 100vh;
+  height: 82vh;
 }
 .cities {
   position: relative;
   display: grid;
-  top: 53px;
+  top: 4rem;
   grid-template-rows: 1fr 1fr 1fr;
   /* grid-template-columns: 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw 30vw; */
-  grid-template-columns: repeat(13, minmax(30vw, 40vw));
+  grid-template-columns: repeat(13, minmax(50vw, 60vw));
   object-fit: cover;
-  grid-gap: 5px;
-  margin-bottom: 80px;
-  height: 100vh;
+  grid-gap: .4rem;
+  padding-bottom: 8vh;
 }
 /* .cityPanel {
   height: 30%;
@@ -142,7 +142,8 @@ span.city-name {
 }
 
 .city-data-viz {
-  float:left;
+  float: left;
+  display: inline-block;
 }
 /* ====================================
 Keeps filter buttons fixed. Will not move on scroll of page

@@ -96,8 +96,8 @@ class CityCard extends React.Component {
     const city = this.props.city;
     let style = {
       backgroundImage: `url(./images/${city.id}.jpg)`,
-      width: 'auto',
-      height: '33vh',
+      width: '50vw',
+      height: '29vh',
       backgroundPosition: "center",
       backgroundSize: "cover",
       position: "relative",
