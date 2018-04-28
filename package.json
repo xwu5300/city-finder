@@ -36,7 +36,6 @@
     "request": "^2.81.0",
     "request-promise-native": "^1.0.5",
     "twitter": "^1.7.1",
-    "victory": "^0.26.0",
-    "yql": "^1.0.2"
+    "victory": "^0.26.0"
   }
 }
