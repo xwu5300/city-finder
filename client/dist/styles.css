@@ -93,6 +93,7 @@ Creates grid format to hold cities
   object-fit: cover;
   grid-gap: .4rem;
   padding-bottom: 8vh;
+
 }
 /* .cityPanel {
   height: 30%;

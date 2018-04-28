@@ -150,7 +150,7 @@ class UsDataOverview extends React.Component {
 
     node.on('click', function(d, i) {
         var category = d.category;
-        var selectedNodes = d3.selectAll('g')
+        var selectedNodes = d3.selectAll('.node')
         .filter(d => d.category === category).transition().duration(1000)
         .attr('transform', d => `translate(50, ${d.y})`)
         setTimeout(() => {
