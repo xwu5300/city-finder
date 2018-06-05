@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: Tom Wagner
-  - __Scrum Master__: David Baek
-  - __Development Team Members__: Wei Gao, Ryan Schabel
+  - __Product Owner__: Jun Yoo
+  - __Scrum Master__: Brian Lee
+  - __Development Team Members__: Vanessa Wu, Rahul Krish
 
 ## Table of Contents
 
