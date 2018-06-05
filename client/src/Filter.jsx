@@ -61,7 +61,63 @@ class Filter extends React.Component {
       }
     );
   }
-
+  
+  //on click of "show results"/"show favorites" button, get favorites or get cities based on current state 
+    displayOnPage(event) {
+      this.triggerButton(event.target.id);
+      if (!this.props.showFavorites) {
+        this.getFaves();
+      } else {
+        this.props.getCities(JSON.stringify(this.state));
+      }
+      this.props.toggleFav();
+    }
+  //get favorites from db
+    getFaves() {
+      axios
+        .get("/faves")
+        .then(res => {
+          this.props.setInfo("favorites", res.data);
+        })
+        .catch(err => {
+          console.log("err in client get /faves", err);
+        });
+    }
+  
+    //checks clicked state filter if the clicked filter is included in state arry. 
+    //if it is included, it removes it from the state array
+    //if it is not included, it adds it to the state array
+    onToggle(event) {
+      //change the color of the button when clicked
+      this.triggerButton(event.target.id);
+      //check if state has value
+      if (this.state[event.target.name].includes(event.target.value)) {
+        var newStateArr = this.state[event.target.name].slice();
+        newStateArr.splice(
+          this.state[event.target.name].indexOf(event.target.value),
+          1
+        );
+        this.setState(
+          {
+            [event.target.name]: newStateArr
+          },
+          () => {
+            this.props.getCities(JSON.stringify(this.state));
+          }
+        );
+      } else {
+        var newStateArr = this.state[event.target.name].slice();
+        newStateArr.push(event.target.value);
+        this.setState(
+          {
+            [event.target.name]: newStateArr
+          },
+          () => {
+            this.props.getCities(JSON.stringify(this.state));
+          }
+        );
+      }
+    }
   //display filter buttons on the left side of page in rows. 
   //each id is used as a reference to change 
   render() {
@@ -313,62 +369,6 @@ class Filter extends React.Component {
         </div>
       </div>
     );
-  }
-//on click of "show results"/"show favorites" button, get favorites or get cities based on current state 
-  displayOnPage(event) {
-    this.triggerButton(event.target.id);
-    if (!this.props.showFavorites) {
-      this.getFaves();
-    } else {
-      this.props.getCities(JSON.stringify(this.state));
-    }
-    this.props.toggleFav();
-  }
-//get favorites from db
-  getFaves() {
-    axios
-      .get("/faves")
-      .then(res => {
-        this.props.setInfo("favorites", res.data);
-      })
-      .catch(err => {
-        console.log("err in client get /faves", err);
-      });
-  }
-
-  //checks clicked state filter if the clicked filter is included in state arry. 
-  //if it is included, it removes it from the state array
-  //if it is not included, it adds it to the state array
-  onToggle(event) {
-    //change the color of the button when clicked
-    this.triggerButton(event.target.id);
-    //check if state has value
-    if (this.state[event.target.name].includes(event.target.value)) {
-      var newStateArr = this.state[event.target.name].slice();
-      newStateArr.splice(
-        this.state[event.target.name].indexOf(event.target.value),
-        1
-      );
-      this.setState(
-        {
-          [event.target.name]: newStateArr
-        },
-        () => {
-          this.props.getCities(JSON.stringify(this.state));
-        }
-      );
-    } else {
-      var newStateArr = this.state[event.target.name].slice();
-      newStateArr.push(event.target.value);
-      this.setState(
-        {
-          [event.target.name]: newStateArr
-        },
-        () => {
-          this.props.getCities(JSON.stringify(this.state));
-        }
-      );
-    }
   }
 }
 

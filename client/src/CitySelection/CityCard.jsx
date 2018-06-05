@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { ItemTypes } from '../constants.js';
 import { DragSource } from 'react-dnd';
 import Modal from 'react-modal';
+import MDSpinner from "react-md-spinner";
 
 const customStyles = {
   content : {
@@ -11,7 +12,9 @@ const customStyles = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
+    backgroundColor       : '#18121E',
+
   }
 };
 
@@ -46,14 +49,12 @@ class CityCard extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.handleUserNameInput = this.handleUserNameInput.bind(this);
   }
 
 
   //modal methods
   openModal(e) {
     this.setState({ modalIsOpen: true });
-
     this.handleClick(e);
   }
 
@@ -65,15 +66,7 @@ class CityCard extends React.Component {
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
-
-  handleUserNameInput(ev) {
-    this.setState({
-      username: ev.target.value
-    });
-    console.log('username', this.state.username);
-  }
   //end modal methods
-
 
   handleClick(e) {
     console.log('onclick', e.target.name);
@@ -114,9 +107,6 @@ class CityCard extends React.Component {
         >
 
         <div className="overlay">
-            {/* <h2>
-              {city.city_name_short}, {city.state}
-            </h2> */}
         </div>
         <div className="info">
           <span className="city-name">{city.city_name_short}, {city.state}
@@ -131,8 +121,11 @@ class CityCard extends React.Component {
             contentLabel="Example Modal"
           >
 
-            <h2 ref={subtitle => this.subtitle = subtitle}>Hi There</h2>
-            {this.props.twitterWC}
+            <h2 ref={subtitle => this.subtitle = subtitle}>{this.props.twitterLoading}</h2>
+            <div>
+              {this.props.twitterLoading ? <MDSpinner/> : null}
+            </div>
+              {this.props.twitterLoading ? null : this.props.twitterWC}
             <button onClick={this.closeModal}>close</button>
           </Modal>
           </button>

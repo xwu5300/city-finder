@@ -42,6 +42,8 @@ class UsDataOverview extends React.Component {
     .force('forceY', d3.forceY().strength(.1).y(500))
     .force('charge', d3.forceManyBody().strength(-100));
 
+
+
     simulation.nodes(nodes)
                 .force('collide', d3.forceCollide().strength(1).radius(d => d.value + 3).iterations(2))
                 .alphaTarget(1)
@@ -53,7 +55,7 @@ class UsDataOverview extends React.Component {
         });
         };
 
-    const svg = d3.select('svg').attr('text-anchor', 'middle');
+    const svg = d3.select('.bubbles').attr('text-anchor', 'middle');
     
     var color = d3.scaleOrdinal(['rgb(31,119,180', 'rgb(255,127,14', 'rgb(44,160,44']);
 
@@ -148,7 +150,7 @@ class UsDataOverview extends React.Component {
 
     node.on('click', function(d, i) {
         var category = d.category;
-        var selectedNodes = d3.selectAll('g')
+        var selectedNodes = d3.selectAll('.node')
         .filter(d => d.category === category).transition().duration(1000)
         .attr('transform', d => `translate(50, ${d.y})`)
         setTimeout(() => {
@@ -189,9 +191,10 @@ class UsDataOverview extends React.Component {
   }
 
   render() {
+    console.log('cities in data overview', this.props.cities)
     return (
-        <div>
-          <svg width='1200' height='1000'>
+        <div style={{color: "white"}}>
+          <svg className="bubbles" width='1200' height='1000'>
           </svg>
         </div>
     )
