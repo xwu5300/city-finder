@@ -4,11 +4,11 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
-if (!process.env.MLAB_URL) {
-  var {MLAB_URL} = require('../config.js');
-}
+// if (!process.env.MLAB_URL) {
+//   var {MLAB_URL} = require('../config.js');
+// }
 
-mongoose.connect(process.env.MLAB_URL || MLAB_URL);
+mongoose.connect(process.env.MLAB_URL);
 
 var db = mongoose.connection;
 
